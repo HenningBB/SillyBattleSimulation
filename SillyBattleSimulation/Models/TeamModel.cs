@@ -13,16 +13,35 @@ namespace SillyBattleSimulation.Models
     /// <summary>
     /// Class that Represents a Team to which a <see cref="WarriorModel"/> belongs.
     /// </summary>
-    public class TeamModel
+    public class TeamModel : BaseModel
     {
         private List<WarriorModel> teamMembers;
+        private int teamSize;
 
         /// <summary>
-        /// Gets the Size of the Team.
+        /// Initializes a new instance of the <see cref="TeamModel"/> class.
+        /// </summary>
+        public TeamModel()
+        {
+            this.teamMembers = new List<WarriorModel>();
+        }
+
+        /// <summary>
+        /// Gets or sets the List of Warriors.
+        /// </summary>
+        public List<WarriorModel> TeamMembers
+        {
+            get => this.teamMembers;
+            set => this.SetProperty(ref this.teamMembers, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the Size of the Team.
         /// </summary>
         public int TeamSize
         {
-            get { return this.teamMembers.Count; }
+            get => this.teamSize;
+            set => this.SetProperty(ref this.teamSize, value);
         }
 
         /// <summary>
@@ -31,7 +50,8 @@ namespace SillyBattleSimulation.Models
         public void AddRandomWarrior()
         {
             WarriorModel warrior = new WarriorModel();
-            this.teamMembers.Add(warrior);
+            this.TeamMembers.Add(warrior);
+            this.TeamSize = this.TeamMembers.Count;
         }
     }
 }
