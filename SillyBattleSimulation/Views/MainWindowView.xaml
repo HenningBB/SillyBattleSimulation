@@ -22,7 +22,17 @@
             <Label Content="{Binding TeamA.TeamSize}"/>
         </StackPanel>
         <StackPanel Grid.Column="1">
-
+            <ListView ItemsSource="{Binding TeamA.TeamMembers}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <Label Content="{Binding Health}"/>
+                            <Label Content="{Binding Strength}"/>
+                            <Label Content="{Binding Defence}"/>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackPanel>
         <StackPanel Grid.Column="2" 
                     VerticalAlignment="Bottom">
@@ -31,7 +41,17 @@
                     Margin="15"/>
         </StackPanel>
         <StackPanel Grid.Column="3">
-
+            <ListView ItemsSource="{Binding TeamB.TeamMembers}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <Label Content="{Binding Health}"/>
+                            <Label Content="{Binding Strength}"/>
+                            <Label Content="{Binding Defence}"/>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackPanel>
         <StackPanel Grid.Column="4">
             <Label Content="Team B"/>

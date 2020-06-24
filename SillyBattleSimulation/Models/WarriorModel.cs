@@ -29,5 +29,32 @@ namespace SillyBattleSimulation.Models
             this.health = r.Next(11);
             this.defence = r.Next(11);
         }
+
+        /// <summary>
+        /// Gets or sets the Strength of an Warrior.
+        /// </summary>
+        public int Strength
+        {
+            get => this.strength;
+            set => this.SetProperty(ref this.strength, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the Health of an Warrior.
+        /// </summary>
+        public int Health
+        {
+            get => this.health;
+            set => this.SetProperty(ref this.health, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the Defence of an Warrior.
+        /// </summary>
+        public int Defence
+        {
+            get => this.defence;
+            set => this.SetProperty(ref this.defence, value);
+        }
     }
 }

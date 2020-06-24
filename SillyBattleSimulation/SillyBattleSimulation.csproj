@@ -65,6 +65,7 @@
     </Compile>
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\BattleModel.cs" />
     <Compile Include="Models\TeamModel.cs" />
     <Compile Include="Models\WarriorModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />

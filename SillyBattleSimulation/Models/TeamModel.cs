@@ -6,6 +6,7 @@ namespace SillyBattleSimulation.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace SillyBattleSimulation.Models
     /// </summary>
     public class TeamModel : BaseModel
     {
-        private List<WarriorModel> teamMembers;
+        private ObservableCollection<WarriorModel> teamMembers;
         private int teamSize;
 
         /// <summary>
@@ -23,13 +24,13 @@ namespace SillyBattleSimulation.Models
         /// </summary>
         public TeamModel()
         {
-            this.teamMembers = new List<WarriorModel>();
+            this.teamMembers = new ObservableCollection<WarriorModel>();
         }
 
         /// <summary>
         /// Gets or sets the List of Warriors.
         /// </summary>
-        public List<WarriorModel> TeamMembers
+        public ObservableCollection<WarriorModel> TeamMembers
         {
             get => this.teamMembers;
             set => this.SetProperty(ref this.teamMembers, value);

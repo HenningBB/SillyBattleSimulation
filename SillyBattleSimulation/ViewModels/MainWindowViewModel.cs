@@ -20,6 +20,7 @@ namespace SillyBattleSimulation.ViewModels
     {
         private TeamModel teamA;
         private TeamModel teamB;
+        private BattleModel battleModel;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindowViewModel"/> class.
@@ -28,6 +29,7 @@ namespace SillyBattleSimulation.ViewModels
         {
             this.teamA = new TeamModel();
             this.teamB = new TeamModel();
+            this.battleModel = new BattleModel();
             this.AddWarriorACommand = new Command(this.AddWarriorA);
             this.AddWarriorBCommand = new Command(this.AddWarriorB);
         }
@@ -68,6 +70,11 @@ namespace SillyBattleSimulation.ViewModels
         private void AddWarriorB(object commandParameter)
         {
             this.TeamB.AddRandomWarrior();
+        }
+
+        private void Battle(object commandParameter)
+        {
+            this.battleModel.Battle(this.TeamA.TeamMembers[0], this.TeamB.TeamMembers[0]);
         }
     }
 }
