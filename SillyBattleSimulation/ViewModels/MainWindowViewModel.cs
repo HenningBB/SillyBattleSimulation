@@ -13,7 +13,13 @@ namespace SillyBattleSimulation.ViewModels
     /// <summary>
     /// Class of the Main View.
     /// </summary>
-    public class MainWindowViewModel
+    public class MainWindowViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindowViewModel"/> class.
+        /// </summary>
+        public MainWindowViewModel()
+        {
+        }
     }
 }

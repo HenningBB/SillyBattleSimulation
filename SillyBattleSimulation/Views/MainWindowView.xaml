@@ -7,6 +7,27 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <Label Content="Team A"/>
+            <Button Content="+"/>
+            <Label Content="{Binding}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+
+        </StackPanel>
+        <StackPanel Grid.Column="2">
+
+        </StackPanel>
+        <StackPanel Grid.Column="3">
+            <Label Content="Team B"/>
+            <Button Content="+"/>
+            <Label Content="{Binding}"/>
+        </StackPanel>
     </Grid>
 </Window>
