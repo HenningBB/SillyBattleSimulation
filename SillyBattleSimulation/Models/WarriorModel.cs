@@ -13,7 +13,7 @@ namespace SillyBattleSimulation.Models
     /// <summary>
     /// Class that represents a Fighting asset.
     /// </summary>
-    public class WarriorModel
+    public class WarriorModel : BaseModel
     {
         private int strength;
         private int health;
