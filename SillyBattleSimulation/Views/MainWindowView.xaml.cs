@@ -1,4 +1,4 @@
-﻿// <copyright file="MainWindow.xaml.cs" company="PlaceholderCompany">
+﻿// <copyright file="MainWindowView.xaml.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
@@ -22,12 +22,12 @@ namespace SillyBattleSimulation
     /// <summary>
     /// View for the <see cref="MainWindowViewModel"/>.
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindowView : Window
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindowView"/> class.
         /// </summary>
-        public MainWindow()
+        public MainWindowView()
         {
             this.InitializeComponent();
         }

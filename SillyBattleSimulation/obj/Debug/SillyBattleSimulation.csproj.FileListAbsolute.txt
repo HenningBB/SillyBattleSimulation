@@ -1,0 +1,15 @@
+C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\SillyBattleSimulation.csprojAssemblyReference.cache
+C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\bin\Debug\SillyBattleSimulation.exe.config
+C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\bin\Debug\SillyBattleSimulation.exe
+C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\bin\Debug\SillyBattleSimulation.pdb
+C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\Views\MainWindowView.g.cs
+C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\App.g.cs
+C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\SillyBattleSimulation_MarkupCompile.cache
+C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\SillyBattleSimulation_MarkupCompile.lref
+C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\Views\MainWindowView.baml
+C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\SillyBattleSimulation.g.resources
+C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\SillyBattleSimulation.Properties.Resources.resources
+C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\SillyBattleSimulation.csproj.GenerateResource.cache
+C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\SillyBattleSimulation.csproj.CoreCompileInputs.cache
+C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\SillyBattleSimulation.exe
+C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\SillyBattleSimulation.pdb
