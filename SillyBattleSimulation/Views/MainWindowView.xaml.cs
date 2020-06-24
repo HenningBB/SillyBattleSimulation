@@ -18,6 +18,7 @@ namespace SillyBattleSimulation
     using System.Windows.Media.Imaging;
     using System.Windows.Navigation;
     using System.Windows.Shapes;
+    using SillyBattleSimulation.ViewModels;
 
     /// <summary>
     /// View for the <see cref="MainWindowViewModel"/>.
@@ -30,6 +31,7 @@ namespace SillyBattleSimulation
         public MainWindowView()
         {
             this.InitializeComponent();
+            this.DataContext = new MainWindowViewModel();
         }
     }
 }
