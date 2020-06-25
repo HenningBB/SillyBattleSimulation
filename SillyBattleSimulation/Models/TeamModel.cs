@@ -51,6 +51,7 @@ namespace SillyBattleSimulation.Models
         public void AddRandomWarrior()
         {
             WarriorModel warrior = new WarriorModel();
+            warrior.Index = this.TeamMembers.Count;
             this.TeamMembers.Add(warrior);
             this.TeamSize = this.TeamMembers.Count;
         }
