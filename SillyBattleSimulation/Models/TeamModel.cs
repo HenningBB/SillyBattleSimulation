@@ -54,5 +54,13 @@ namespace SillyBattleSimulation.Models
             this.TeamMembers.Add(warrior);
             this.TeamSize = this.TeamMembers.Count;
         }
+
+        /// <summary>
+        /// Removes the first Warrior from the Team.
+        /// </summary>
+        public void RemoveWarrior()
+        {
+            this.TeamMembers.Remove(this.TeamMembers[0]);
+        }
     }
 }
