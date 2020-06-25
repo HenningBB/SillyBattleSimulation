@@ -15,6 +15,7 @@ namespace SillyBattleSimulation.Models
     /// </summary>
     public class WarriorModel : BaseModel
     {
+        private int index;
         private int strength;
         private int health;
         private int defence;
@@ -28,6 +29,15 @@ namespace SillyBattleSimulation.Models
             this.strength = r.Next(11);
             this.health = r.Next(11);
             this.defence = r.Next(11);
+        }
+
+        /// <summary>
+        /// Gets or sets the Index of the Warrior.
+        /// </summary>
+        public int Index
+        {
+            get => this.index;
+            set => this.SetProperty(ref this.index, value);
         }
 
         /// <summary>
