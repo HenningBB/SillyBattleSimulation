@@ -29,6 +29,7 @@
                             <Label Content="{Binding Health}"/>
                             <Label Content="{Binding Strength}"/>
                             <Label Content="{Binding Defence}"/>
+                            <Label Content="{Binding Index}"/>
                         </WrapPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -48,6 +49,7 @@
                             <Label Content="{Binding Health}"/>
                             <Label Content="{Binding Strength}"/>
                             <Label Content="{Binding Defence}"/>
+                            <Label Content="{Binding Index}"/>
                         </WrapPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
