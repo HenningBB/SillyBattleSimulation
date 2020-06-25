@@ -62,6 +62,11 @@ namespace SillyBattleSimulation.Models
         public void RemoveWarrior()
         {
             this.TeamMembers.Remove(this.TeamMembers[0]);
+            this.TeamSize = this.TeamMembers.Count;
+            foreach (var item in this.TeamMembers)
+            {
+                item.Index = this.TeamMembers.IndexOf(item);
+            }
         }
     }
 }
