@@ -19,6 +19,7 @@ namespace SillyBattleSimulation.Models
         private int strength;
         private int health;
         private int defence;
+        private int awarenes;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WarriorModel"/> class.
@@ -26,9 +27,10 @@ namespace SillyBattleSimulation.Models
         public WarriorModel()
         {
             Random r = new Random();
-            this.strength = r.Next(11);
-            this.health = r.Next(11);
-            this.defence = r.Next(11);
+            this.Strength = r.Next(11);
+            this.Health = r.Next(11);
+            this.Defence = r.Next(11);
+            this.Awarenes = r.Next(1, 11);
         }
 
         /// <summary>
@@ -65,6 +67,15 @@ namespace SillyBattleSimulation.Models
         {
             get => this.defence;
             set => this.SetProperty(ref this.defence, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the Awarenes of an Warrior.
+        /// </summary>
+        public int Awarenes
+        {
+            get => this.awarenes;
+            set => this.SetProperty(ref this.awarenes, value);
         }
     }
 }

@@ -22,7 +22,8 @@ namespace SillyBattleSimulation.ViewModels
     {
         private bool ticking;
         private TeamModel teamA;
-        private TeamModel teamB;
+
+        // private TeamModel teamB;
         private BattleModel battleModel;
         private DispatcherTimer timer = new DispatcherTimer();
         private TimeSpan span = new TimeSpan(0, 0, 0, 1);
@@ -36,10 +37,12 @@ namespace SillyBattleSimulation.ViewModels
             this.timer.Interval = this.span;
             this.timer.Tick += this.Timer_Tick;
             this.teamA = new TeamModel();
-            this.teamB = new TeamModel();
+
+            // this.teamB = new TeamModel();
             this.battleModel = new BattleModel();
             this.AddWarriorACommand = new Command(this.AddWarriorA);
-            this.AddWarriorBCommand = new Command(this.AddWarriorB);
+
+            // this.AddWarriorBCommand = new Command(this.AddWarriorB);
             this.BattleCommand = new Command(this.Battle);
         }
 
@@ -70,22 +73,20 @@ namespace SillyBattleSimulation.ViewModels
         /// <summary>
         /// Gets or sets the Model of the second Team.
         /// </summary>
-        public TeamModel TeamB
-        {
-            get => this.teamB;
-            set => this.SetProperty(ref this.teamB, value);
-        }
-
+        // public TeamModel TeamB
+        // {
+        //    get => this.teamB;
+        //    set => this.SetProperty(ref this.teamB, value);
+        // }
         private void AddWarriorA(object commandParameter)
         {
             this.TeamA.AddRandomWarrior();
         }
 
-        private void AddWarriorB(object commandParameter)
-        {
-            this.TeamB.AddRandomWarrior();
-        }
-
+        // private void AddWarriorB(object commandParameter)
+        // {
+        //    this.TeamB.AddRandomWarrior();
+        // }
         private void Battle(object commandParameter)
         {
             if (this.ticking)
@@ -104,38 +105,44 @@ namespace SillyBattleSimulation.ViewModels
         {
             try
             {
-                WarriorModel warriorAAttacks, warriorBAttacks;
-                warriorAAttacks = this.battleModel.Battle(this.TeamA.TeamMembers[0], this.TeamB.TeamMembers[0]);
-                warriorBAttacks = this.battleModel.Battle(this.TeamB.TeamMembers[0], this.TeamA.TeamMembers[0]);
-                if (warriorAAttacks == null)
+                if (this.TeamA.TeamSize > 1)
                 {
-                    if (warriorBAttacks == null)
-                    {
-                        this.TeamA.RemoveWarrior();
-                        this.TeamB.RemoveWarrior();
-                    }
-                    else if (warriorBAttacks == this.TeamB.TeamMembers[0])
-                    {
-                        this.TeamA.RemoveWarrior();
-                    }
-                    else
-                    {
-                        this.TeamB.RemoveWarrior();
-                    }
+                    this.TeamA.TeamMembers[0] = this.battleModel.Battle(this.TeamA.TeamMembers[0], this.TeamA.TeamMembers[1]);
+                    this.TeamA.RemoveWarrior(this.TeamA.TeamMembers[1]);
                 }
-                else if (warriorAAttacks == this.TeamA.TeamMembers[0])
-                {
-                    this.TeamB.RemoveWarrior();
-                }
-                else
-                {
-                    this.TeamA.RemoveWarrior();
-                }
-            }
-            catch (System.ArgumentOutOfRangeException)
-            {
-                this.TeamA.AddRandomWarrior();
-                this.TeamB.AddRandomWarrior();
+
+                // WarriorModel warriorAAttacks, warriorBAttacks;
+                //    warriorAAttacks = this.battleModel.Battle(this.TeamA.TeamMembers[0], this.TeamB.TeamMembers[0]);
+                //    warriorBAttacks = this.battleModel.Battle(this.TeamB.TeamMembers[0], this.TeamA.TeamMembers[0]);
+                //    if (warriorAAttacks == null)
+                //    {
+                //        if (warriorBAttacks == null)
+                //        {
+                //            this.TeamA.RemoveWarrior();
+                //            this.TeamB.RemoveWarrior();
+                //        }
+                //        else if (warriorBAttacks == this.TeamB.TeamMembers[0])
+                //        {
+                //            this.TeamA.RemoveWarrior();
+                //        }
+                //        else
+                //        {
+                //            this.TeamB.RemoveWarrior();
+                //        }
+                //    }
+                //    else if (warriorAAttacks == this.TeamA.TeamMembers[0])
+                //    {
+                //        this.TeamB.RemoveWarrior();
+                //    }
+                //    else
+                //    {
+                //        this.TeamA.RemoveWarrior();
+                //    }
+                // }
+                // catch (System.ArgumentOutOfRangeException)
+                // {
+                //    this.TeamA.AddRandomWarrior();
+                //    this.TeamB.AddRandomWarrior();
             }
             catch (Exception ex)
             {

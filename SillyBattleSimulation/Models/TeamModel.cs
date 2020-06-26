@@ -68,5 +68,19 @@ namespace SillyBattleSimulation.Models
                 item.Index = this.TeamMembers.IndexOf(item);
             }
         }
+
+        /// <summary>
+        /// Removes a specific Warrior from the Team.
+        /// </summary>
+        /// <param name="warrior">the warrior to remove.</param>
+        public void RemoveWarrior(WarriorModel warrior)
+        {
+            this.TeamMembers.Remove(warrior);
+            this.TeamSize = this.TeamMembers.Count;
+            foreach (var item in this.TeamMembers)
+            {
+                item.Index = this.TeamMembers.IndexOf(item);
+            }
+        }
     }
 }

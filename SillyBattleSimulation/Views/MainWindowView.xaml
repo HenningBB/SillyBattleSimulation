@@ -11,8 +11,8 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <!--<ColumnDefinition/>
+            <ColumnDefinition/>-->
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
             <Label Content="Team A"/>
@@ -26,10 +26,11 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <WrapPanel>
-                            <Label Content="{Binding Health}"/>
+                            <!--<Label Content="{Binding Health}"/>-->
                             <Label Content="{Binding Strength}"/>
                             <Label Content="{Binding Defence}"/>
-                            <Label Content="{Binding Index}"/>
+                            <!--<Label Content="{Binding Awarenes}"/>
+                            <Label Content="{Binding Index}"/>-->
                         </WrapPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -41,7 +42,7 @@
                     Command="{Binding Path=BattleCommand}"
                     Margin="15"/>
         </StackPanel>
-        <StackPanel Grid.Column="3">
+        <!--<StackPanel Grid.Column="3">
             <ListView ItemsSource="{Binding TeamB.TeamMembers}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -61,6 +62,6 @@
                     Command="{Binding Path=AddWarriorBCommand}"
                     Margin="5"/>
             <Label Content="{Binding TeamB.TeamSize}"/>
-        </StackPanel>
+        </StackPanel>-->
     </Grid>
 </Window>
