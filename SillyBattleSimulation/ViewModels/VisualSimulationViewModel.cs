@@ -4,12 +4,12 @@
 
 namespace SillyBattleSimulation.ViewModels
 {
-    using SillyBattleSimulation.Commands;
-    using SillyBattleSimulation.Models;
     using System;
     using System.Windows.Input;
     using System.Windows.Media;
     using System.Windows.Threading;
+    using SillyBattleSimulation.Commands;
+    using SillyBattleSimulation.Models;
 
     /// <summary>
     /// Class of the Visual Simulation View.
