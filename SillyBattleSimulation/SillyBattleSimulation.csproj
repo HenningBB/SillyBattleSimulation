@@ -55,6 +55,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\VisualTeamModel.cs" />
+    <Compile Include="Models\VisualWarriorModel.cs" />
+    <Compile Include="ViewModels\VisualSimulationViewModel.cs" />
+    <Compile Include="Views\VisualSimulationView.xaml.cs">
+      <DependentUpon>VisualSimulationView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\MainWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -66,6 +72,7 @@
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\BattleModel.cs" />
+    <Compile Include="Models\ClockModel.cs" />
     <Compile Include="Models\TeamModel.cs" />
     <Compile Include="Models\WarriorModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
@@ -74,6 +81,10 @@
       <DependentUpon>MainWindowView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\VisualSimulationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

@@ -13,3 +13,5 @@ C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\o
 C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\SillyBattleSimulation.csproj.CoreCompileInputs.cache
 C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\SillyBattleSimulation.exe
 C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\SillyBattleSimulation.pdb
+C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\Views\VisualSimulationView.g.cs
+C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\Views\VisualSimulationView.baml

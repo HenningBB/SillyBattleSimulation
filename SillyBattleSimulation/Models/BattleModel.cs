@@ -23,25 +23,36 @@ namespace SillyBattleSimulation.Models
         }
 
         /// <summary>
-        /// Method to determine the Winner of an Battle.
+        /// Method to have two <see cref="WarriorModel"/> do Battle.
         /// </summary>
         /// <param name="attackingWarrior">Attacking Warrior.</param>
         /// <param name="defendingWarrior">Defending Warrior.</param>
-        /// <returns>Winner if the Battle.</returns>
-        public WarriorModel Battle(WarriorModel attackingWarrior, WarriorModel defendingWarrior)
+        public void Battle(WarriorModel attackingWarrior, WarriorModel defendingWarrior)
         {
-            WarriorModel winner;
-
             if (attackingWarrior.Strength > defendingWarrior.Defence)
             {
-                winner = attackingWarrior;
+                defendingWarrior.CurrentHealth -= (short)(attackingWarrior.Strength - defendingWarrior.Defence);
+            }
+            else if (attackingWarrior.Strength < defendingWarrior.Defence)
+            {
+                attackingWarrior.CurrentHealth -= (short)(defendingWarrior.Defence - attackingWarrior.Strength);
             }
             else
             {
-                winner = defendingWarrior;
+                if (defendingWarrior.Strength > attackingWarrior.Defence)
+                {
+                    attackingWarrior.CurrentHealth -= (short)(defendingWarrior.Strength - attackingWarrior.Defence);
+                }
+                else if (defendingWarrior.Strength < attackingWarrior.Defence)
+                {
+                    defendingWarrior.CurrentHealth -= (short)(attackingWarrior.Defence - defendingWarrior.Strength);
+                }
+                else
+                {
+                    attackingWarrior.CurrentHealth--;
+                    defendingWarrior.CurrentHealth--;
+                }
             }
-
-            return winner;
         }
     }
 }
