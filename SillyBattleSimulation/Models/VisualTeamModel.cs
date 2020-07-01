@@ -31,16 +31,23 @@ namespace SillyBattleSimulation.Models
             this.TeamSize = model.TeamSize;
 
             this.AddVisualWarrior(model.TeamMembers[0]);
-
-            this.VisualTeamMembers[0].PositionY = 5;
             this.VisualTeamMembers[0].Colour = brush;
 
             for (int i = 1; i < this.TeamSize; i++)
             {
                 this.AddVisualWarrior(model.TeamMembers[i]);
-                this.VisualTeamMembers[i].PositionY = (short)(this.VisualTeamMembers[i - 1].PositionY + 10);
                 this.VisualTeamMembers[i].Colour = brush;
             }
+
+            this.PLaceWarriors();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VisualTeamModel"/> class.
+        /// </summary>
+        public VisualTeamModel()
+        {
+            this.visualTeamMembers = new ObservableCollection<VisualWarriorModel>();
         }
 
         /// <summary>
@@ -69,6 +76,25 @@ namespace SillyBattleSimulation.Models
         {
             VisualWarriorModel visualWarrior = new VisualWarriorModel(model);
             this.VisualTeamMembers.Add(visualWarrior);
+        }
+
+        /// <summary>
+        /// Adds an existing <see cref="VisualWarriorModel"/> to the List.
+        /// </summary>
+        /// <param name="visualModel">The <see cref="VisualWarriorModel"/> to add.</param>
+        public void AddVisualWarrior(VisualWarriorModel visualModel)
+        {
+            this.VisualTeamMembers.Add(visualModel);
+        }
+
+        /// <summary>
+        /// Removes a specific VisualWarrior from the Team.
+        /// </summary>
+        /// <param name="warrior">The VisualWarrior to remove.</param>
+        public void RemoveVisualWarrior(VisualWarriorModel warrior)
+        {
+            this.VisualTeamMembers.Remove(warrior);
+            this.TeamSize = this.VisualTeamMembers.Count;
         }
 
         /// <summary>
@@ -126,6 +152,18 @@ namespace SillyBattleSimulation.Models
             foreach (var item in this.VisualTeamMembers)
             {
                 item.Turn(direction);
+            }
+        }
+
+        /// <summary>
+        /// Places the Warriors in a Line.
+        /// </summary>
+        public void PLaceWarriors()
+        {
+            this.VisualTeamMembers[0].PositionY = 5;
+            for (int i = 1; i < this.TeamSize; i++)
+            {
+                this.VisualTeamMembers[i].PositionY = (short)(this.VisualTeamMembers[i - 1].PositionY + 10);
             }
         }
     }

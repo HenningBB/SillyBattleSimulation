@@ -20,6 +20,7 @@ namespace SillyBattleSimulation.ViewModels
         private VisualTeamModel team2;
         private VisualWarriorModel king1;
         private VisualWarriorModel king2;
+        private VisualBattleModel visualBattle;
         private bool ticking;
         private DispatcherTimer timer = new DispatcherTimer();
         private TimeSpan time = new TimeSpan(0, 0, 0, 0, 50);
@@ -45,6 +46,8 @@ namespace SillyBattleSimulation.ViewModels
             this.King2 = new VisualWarriorModel(king2);
 
             this.BattleCommand = new Command(this.Battle);
+
+            this.visualBattle = new VisualBattleModel();
 
             // Anfangspositionen
             // this.King1.PositionX = 5;
@@ -149,6 +152,45 @@ namespace SillyBattleSimulation.ViewModels
                 steps = 6;
                 this.Team1.MoveTeamBackward(steps);
                 this.Team2.MoveTeamBackward(steps);
+            }
+            else
+            {
+                this.visualBattle.Battle(this.Team1, this.Team2);
+
+                VisualTeamModel delete1 = new VisualTeamModel();
+                VisualTeamModel delete2 = new VisualTeamModel();
+                foreach (var dead in this.Team1.VisualTeamMembers)
+                {
+                    if (dead.CurrentHealth <= 0)
+                    {
+                        delete1.AddVisualWarrior(dead);
+                    }
+                }
+
+                foreach (var dead in this.Team2.VisualTeamMembers)
+                {
+                    if (dead.CurrentHealth <= 0)
+                    {
+                        delete2.AddVisualWarrior(dead);
+                    }
+                }
+
+                foreach (var item in delete1.VisualTeamMembers)
+                {
+                    this.Team1.RemoveVisualWarrior(item);
+                }
+
+                foreach (var item in delete2.VisualTeamMembers)
+                {
+                    this.Team2.RemoveVisualWarrior(item);
+                }
+
+                this.Team1.PLaceWarriors();
+                this.Team2.PLaceWarriors();
+
+                steps = 6;
+                this.Team1.MoveTeamVorward(steps);
+                this.Team2.MoveTeamVorward(steps);
             }
 
             this.ticker++;

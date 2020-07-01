@@ -61,6 +61,7 @@
     <Compile Include="Views\VisualSimulationView.xaml.cs">
       <DependentUpon>VisualSimulationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\VisualBattleModel.cs" />
     <Page Include="Views\MainWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
