@@ -58,7 +58,21 @@ namespace SillyBattleSimulation.Models
             {
                 foreach (var item in visualTeam1.VisualTeamMembers)
                 {
-                    this.Battle(item, visualTeam2.VisualTeamMembers.SingleOrDefault(x => x.PositionY == item.PositionY));
+                    this.Battle(item, visualTeam2.VisualTeamMembers.Single(x => x.PositionY == item.PositionY));
+                }
+            }
+            else if (visualTeam1.TeamSize > visualTeam2.TeamSize)
+            {
+                for (int i = 0; i < visualTeam2.TeamSize; i++)
+                {
+                    this.Battle(visualTeam1.VisualTeamMembers[i], visualTeam2.VisualTeamMembers[i]);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < visualTeam1.TeamSize; i++)
+                {
+                    this.Battle(visualTeam1.VisualTeamMembers[i], visualTeam2.VisualTeamMembers[i]);
                 }
             }
         }

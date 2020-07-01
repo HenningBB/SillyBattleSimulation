@@ -39,7 +39,7 @@ namespace SillyBattleSimulation.Models
                 this.VisualTeamMembers[i].Colour = brush;
             }
 
-            this.PLaceWarriors();
+            this.PlaceWarriors();
         }
 
         /// <summary>
@@ -158,12 +158,19 @@ namespace SillyBattleSimulation.Models
         /// <summary>
         /// Places the Warriors in a Line.
         /// </summary>
-        public void PLaceWarriors()
+        public void PlaceWarriors()
         {
-            this.VisualTeamMembers[0].PositionY = 5;
+            this.VisualTeamMembers[0].PositionY = 250;
             for (int i = 1; i < this.TeamSize; i++)
             {
-                this.VisualTeamMembers[i].PositionY = (short)(this.VisualTeamMembers[i - 1].PositionY + 10);
+                if (i % 2 == 0)
+                {
+                    this.VisualTeamMembers[i].PositionY = (short)(this.VisualTeamMembers[i - 1].PositionY + i * 10);
+                }
+                else
+                {
+                    this.VisualTeamMembers[i].PositionY = (short)(this.VisualTeamMembers[i - 1].PositionY - i * 10);
+                }
             }
         }
     }
