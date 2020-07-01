@@ -26,6 +26,10 @@ namespace SillyBattleSimulation.ViewModels
         private TimeSpan time = new TimeSpan(0, 0, 0, 0, 50);
         private int ticker = 0;
 
+        public VisualSimulationViewModel()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="VisualSimulationViewModel"/> class.
         /// </summary>

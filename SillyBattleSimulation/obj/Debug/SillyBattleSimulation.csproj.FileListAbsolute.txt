@@ -15,3 +15,6 @@ C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\o
 C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\SillyBattleSimulation.pdb
 C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\Views\VisualSimulationView.g.cs
 C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\Views\VisualSimulationView.baml
+C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\Views\SimulationView.g.cs
+C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\Views\SimulationView.baml
+C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\GeneratedInternalTypeHelper.g.cs

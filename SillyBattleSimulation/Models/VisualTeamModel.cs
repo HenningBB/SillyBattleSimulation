@@ -165,11 +165,11 @@ namespace SillyBattleSimulation.Models
             {
                 if (i % 2 == 0)
                 {
-                    this.VisualTeamMembers[i].PositionY = (short)(this.VisualTeamMembers[i - 1].PositionY + i * 10);
+                    this.VisualTeamMembers[i].PositionY = (short)(this.VisualTeamMembers[i - 1].PositionY + (i * 10));
                 }
                 else
                 {
-                    this.VisualTeamMembers[i].PositionY = (short)(this.VisualTeamMembers[i - 1].PositionY - i * 10);
+                    this.VisualTeamMembers[i].PositionY = (short)(this.VisualTeamMembers[i - 1].PositionY - (i * 10));
                 }
             }
         }

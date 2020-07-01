@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\App.xaml
-2-1994822384
+3-236561528
 
-1857002516
+20499130046
 13-1505183044
-Views\MainWindowView.xaml;Views\VisualSimulationView.xaml;
+Views\MainWindowView.xaml;Views\SimulationView.xaml;Views\VisualSimulationView.xaml;
 
 False
 

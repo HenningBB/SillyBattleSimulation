@@ -9,7 +9,6 @@ namespace SillyBattleSimulation.ViewModels
     using System.Windows.Input;
     using System.Windows.Threading;
     using SillyBattleSimulation.Commands;
-    using SillyBattleSimulation.Models;
     using SillyBattleSimulation.Views;
 
     /// <summary>
@@ -17,201 +16,34 @@ namespace SillyBattleSimulation.ViewModels
     /// </summary>
     public class MainWindowViewModel : BaseViewModel
     {
-        private bool ticking;
-        private ClockModel clock;
-        private WarriorModel kingA;
-        private WarriorModel kingB;
-        private TeamModel teamA;
-        private TeamModel teamB;
-        private BattleModel battleModel;
-        private DispatcherTimer timer = new DispatcherTimer();
-        private TimeSpan span = new TimeSpan(500);
+        private object simulation;
+        private object visualSimulation;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindowViewModel"/> class.
         /// </summary>
         public MainWindowViewModel()
         {
-            this.ticking = false;
-            this.timer.Interval = this.span;
-            this.timer.Tick += this.Timer_Tick;
-            this.clock = new ClockModel();
-            this.clock.Angle = 0.0;
-            this.teamA = new TeamModel();
-            this.teamB = new TeamModel();
-            this.battleModel = new BattleModel();
-            this.AddWarriorACommand = new Command(this.AddWarriorA);
-            this.AddWarriorBCommand = new Command(this.AddWarriorB);
-            this.BattleCommand = new Command(this.Battle);
-            this.VisualBattleWindowCommand = new Command(this.VisualBattleWindow);
+            this.Simulation = new SimulationViewModel();
+            this.VisualSimulation = new VisualSimulationViewModel();
         }
 
         /// <summary>
-        /// Gets the Command to add an Warrior to TeamA.
+        /// Gets or sets the currently selected Viewmodel.
         /// </summary>
-        public ICommand AddWarriorACommand { get; private set; }
-
-        /// <summary>
-        /// Gets the Command to add an Warrior to Teamb.
-        /// </summary>
-        public ICommand AddWarriorBCommand { get; private set; }
-
-        /// <summary>
-        /// Gets the Command to do Battle.
-        /// </summary>
-        public ICommand BattleCommand { get; private set; }
-
-        /// <summary>
-        /// Gets the Command to do open a new Window to show visual Battle.
-        /// </summary>
-        public ICommand VisualBattleWindowCommand { get; private set; }
-
-        /// <summary>
-        /// Gets or sets the Clock.
-        /// </summary>
-        public ClockModel Clock
+        public object Simulation
         {
-            get => this.clock;
-            set => this.SetProperty(ref this.clock, value);
+            get => this.simulation;
+            set => this.SetProperty(ref this.simulation, value);
         }
 
         /// <summary>
-        /// Gets or sets the King of Team A.
+        /// Gets or sets the currently selected Viewmodel.
         /// </summary>
-        public WarriorModel KingA
+        public object VisualSimulation
         {
-            get => this.kingA;
-            set => this.SetProperty(ref this.kingA, value);
-        }
-
-        /// <summary>
-        /// Gets or sets the King of Team B.
-        /// </summary>
-        public WarriorModel KingB
-        {
-            get => this.kingB;
-            set => this.SetProperty(ref this.kingB, value);
-        }
-
-        /// <summary>
-        /// Gets or sets the Model of the first Team.
-        /// </summary>
-        public TeamModel TeamA
-        {
-            get => this.teamA;
-            set => this.SetProperty(ref this.teamA, value);
-        }
-
-        /// <summary>
-        /// Gets or sets the Model of the second Team.
-        /// </summary>
-        public TeamModel TeamB
-        {
-            get => this.teamB;
-            set => this.SetProperty(ref this.teamB, value);
-        }
-
-        private void AddWarriorA(object commandParameter)
-        {
-            if (!this.ticking)
-            {
-                for (int i = 0; i < 25; i++)
-                {
-                    this.TeamA.AddRandomWarrior();
-                }
-            }
-        }
-
-        private void AddWarriorB(object commandParameter)
-        {
-            if (!this.ticking)
-            {
-                for (int i = 0; i < 25; i++)
-                {
-                    this.TeamB.AddRandomWarrior();
-                }
-            }
-        }
-
-        private void Battle(object commandParameter)
-        {
-            if (this.ticking)
-            {
-                this.timer.Stop();
-            }
-            else
-            {
-                this.timer.Start();
-            }
-
-            this.ticking = !this.ticking;
-        }
-
-        private void VisualBattleWindow(object commandParameter)
-        {
-            VisualSimulationView visualSimulationView = new VisualSimulationView(this.TeamA, this.TeamB, this.KingA, this.KingB);
-            visualSimulationView.Show();
-        }
-
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            this.Clock.Angle++;
-            if (this.Clock.Angle % 360 == 0)
-            {
-                try
-                {
-                    if (this.TeamA.TeamSize > 0 && this.KingA != null)
-                    {
-                        this.battleModel.Battle(this.TeamA.TeamMembers[0], this.KingA);
-                        if (this.TeamA.TeamMembers[0].CurrentHealth <= 0)
-                        {
-                            this.TeamA.RemoveWarrior(this.TeamA.TeamMembers[0]);
-                        }
-
-                        if (this.KingA.CurrentHealth <= 0)
-                        {
-                            this.KingA = this.TeamA.TeamMembers[0];
-                            this.TeamA.RemoveWarrior(this.TeamA.TeamMembers[0]);
-                        }
-                    }
-                    else if (this.TeamA.TeamSize > 0 && this.KingA == null)
-                    {
-                        this.KingA = this.TeamA.TeamMembers[0];
-                        this.TeamA.RemoveWarrior(this.TeamA.TeamMembers[0]);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-
-                try
-                {
-                    if (this.TeamB.TeamSize > 0 && this.KingB != null)
-                    {
-                        this.battleModel.Battle(this.TeamB.TeamMembers[0], this.KingB);
-                        if (this.TeamB.TeamMembers[0].CurrentHealth <= 0)
-                        {
-                            this.TeamB.RemoveWarrior(this.TeamB.TeamMembers[0]);
-                        }
-
-                        if (this.KingB.CurrentHealth <= 0)
-                        {
-                            this.KingB = this.TeamB.TeamMembers[0];
-                            this.TeamB.RemoveWarrior(this.TeamB.TeamMembers[0]);
-                        }
-                    }
-                    else if (this.TeamB.TeamSize > 0 && this.KingB == null)
-                    {
-                        this.KingB = this.TeamB.TeamMembers[0];
-                        this.TeamB.RemoveWarrior(this.TeamB.TeamMembers[0]);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-            }
+            get => this.visualSimulation;
+            set => this.SetProperty(ref this.visualSimulation, value);
         }
     }
 }
