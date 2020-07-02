@@ -5,10 +5,12 @@
 namespace SillyBattleSimulation.ViewModels
 {
     using System;
+    using System.IO;
     using System.Windows;
     using System.Windows.Input;
     using System.Windows.Threading;
     using SillyBattleSimulation.Commands;
+    using SillyBattleSimulation.Models;
     using SillyBattleSimulation.Views;
 
     /// <summary>
@@ -18,13 +20,17 @@ namespace SillyBattleSimulation.ViewModels
     {
         private BaseViewModel currentViewModel;
         private bool change;
+        private TeamModel team1;
+        private TeamModel team2;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindowViewModel"/> class.
         /// </summary>
         public MainWindowViewModel()
         {
-            this.CurrentViewModel = new SimulationViewModel();
+            this.team1 = new TeamModel();
+            this.team2 = new TeamModel();
+            this.CurrentViewModel = new SimulationViewModel(this.team1, this.team2);
 
             this.ChangeViewmodelCommand = new Command(this.ChangeViewModel);
 
@@ -49,14 +55,27 @@ namespace SillyBattleSimulation.ViewModels
         {
             if (!this.change)
             {
-                this.CurrentViewModel = new VisualSimulationViewModel();
+                this.CurrentViewModel = new VisualSimulationViewModel(this.CurrentViewModel.Unload(1), this.CurrentViewModel.Unload(2));
             }
             else
             {
-                this.CurrentViewModel = new SimulationViewModel();
+                this.CurrentViewModel = new SimulationViewModel(this.CurrentViewModel.Unload(1), this.CurrentViewModel.Unload(2));
             }
 
             this.change = !this.change;
+        }
+
+        private void SaveTeams(TeamModel team1,TeamModel team2)
+        {
+            var fs = File.Open("file.name", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            try
+            {
+                StreamWriter sw = new StreamWriter(fs);
+            }
+            catch
+            {
+
+            }
         }
     }
 }

@@ -49,6 +49,25 @@ namespace SillyBattleSimulation.ViewModels
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="SimulationViewModel"/> class.
+        /// </summary>
+        public SimulationViewModel(TeamModel team1, TeamModel team2)
+        {
+            this.ticking = false;
+            this.timer.Interval = this.span;
+            this.timer.Tick += this.Timer_Tick;
+            this.clock = new ClockModel();
+            this.clock.Angle = 0.0;
+            this.teamA = team1;
+            this.teamB = team2;
+            this.battleModel = new BattleModel();
+            this.AddWarriorACommand = new Command(this.AddWarriorA);
+            this.AddWarriorBCommand = new Command(this.AddWarriorB);
+            this.BattleCommand = new Command(this.Battle);
+            this.VisualBattleWindowCommand = new Command(this.VisualBattleWindow);
+        }
+
+        /// <summary>
         /// Gets the Command to add an Warrior to TeamA.
         /// </summary>
         public ICommand AddWarriorACommand { get; private set; }

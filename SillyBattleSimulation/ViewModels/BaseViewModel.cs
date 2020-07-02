@@ -11,14 +11,35 @@ namespace SillyBattleSimulation.ViewModels
     using System.Runtime.CompilerServices;
     using System.Text;
     using System.Threading.Tasks;
+    using SillyBattleSimulation.Models;
 
     /// <summary>
     /// Base class from which all ViewModel should be derived.
     /// </summary>
     public class BaseViewModel : INotifyPropertyChanged
     {
+        private TeamModel Team1;
+        private TeamModel Team2;
+
         /// <inheritdoc/>
         public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Returns the mentioned Team on Unloading the ViewModel.
+        /// </summary>
+        /// <param name="team">The Team to load.</param>
+        /// <returns>a <see cref="TeamModel"/>.</returns>
+        public TeamModel Unload(int team)
+        {
+            if (team == 1)
+            {
+                return this.Team1;
+            }
+            else
+            {
+                return this.Team2;
+            }
+        }
 
         /// <summary>
         /// Invokes the PropertyChanged event to inform the View about the changed Property.

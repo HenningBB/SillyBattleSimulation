@@ -26,40 +26,12 @@ namespace SillyBattleSimulation.ViewModels
         private TimeSpan time = new TimeSpan(0, 0, 0, 0, 50);
         private int ticker = 0;
 
-        public VisualSimulationViewModel()
-        {
-            // Initialisierung
-            this.Team1 = new VisualTeamModel(team1, Brushes.Red);
-            this.Team2 = new VisualTeamModel(team2, Brushes.Blue);
-            this.Team2.MoveTeamVorward(250);
-            this.Team2.TurnTeam(true);
-            this.Team2.TurnTeam(true);
-
-            this.BattleCommand = new Command(this.Battle);
-
-            this.visualBattle = new VisualBattleModel();
-
-            // Anfangspositionen
-            // this.King1.PositionX = 5;
-            // this.King1.PositionY = 5;
-
-            // this.King2.PositionX = 55;
-            // this.King2.PositionY = 5;
-
-            // Timer
-            this.ticking = false;
-            this.timer.Interval = this.time;
-            this.timer.Tick += this.Timer_Tick;
-        }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="VisualSimulationViewModel"/> class.
         /// </summary>
         /// <param name="team1"><see cref="Team1"/>.</param>
         /// <param name="team2"><see cref="Team2"/>.</param>
-        /// <param name="king1"><see cref="King1"/>.</param>
-        /// <param name="king2"><see cref="King2"/>.</param>
-        public VisualSimulationViewModel(TeamModel team1, TeamModel team2, WarriorModel king1, WarriorModel king2)
+        public VisualSimulationViewModel(TeamModel team1, TeamModel team2)
         {
             // Initialisierung
             this.Team1 = new VisualTeamModel(team1, Brushes.Red);
@@ -67,9 +39,6 @@ namespace SillyBattleSimulation.ViewModels
             this.Team2.MoveTeamVorward(250);
             this.Team2.TurnTeam(true);
             this.Team2.TurnTeam(true);
-
-            this.King1 = new VisualWarriorModel(king1);
-            this.King2 = new VisualWarriorModel(king2);
 
             this.BattleCommand = new Command(this.Battle);
 
@@ -127,6 +96,16 @@ namespace SillyBattleSimulation.ViewModels
         {
             get => this.king2;
             set => this.SetProperty(ref this.king2, value);
+        }
+
+        /// <summary>
+        /// Returns the mentioned Team on Unloading the ViewModel.
+        /// </summary>
+        /// <param name="team">The Team to load.</param>
+        /// <returns>a <see cref="TeamModel"/>.</returns>
+        public TeamModel Unload(int team)
+        {
+            return this.team1;
         }
 
         private void Battle(object commandParameter)
