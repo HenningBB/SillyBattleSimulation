@@ -28,14 +28,9 @@ namespace SillyBattleSimulation.Views
         /// <summary>
         /// Initializes a new instance of the <see cref="VisualSimulationView"/> class.
         /// </summary>
-        /// <param name="team1"><see cref="VisualSimulationViewModel.Team1"/>.</param>
-        /// <param name="team2"><see cref="VisualSimulationViewModel.Team2"/>.</param>
-        /// <param name="king1"><see cref="VisualSimulationViewModel.King1"/>.</param>
-        /// <param name="king2"><see cref="VisualSimulationViewModel.King2"/>.</param>
-        public VisualSimulationView(TeamModel team1, TeamModel team2, WarriorModel king1, WarriorModel king2)
+        public VisualSimulationView()
         {
             this.InitializeComponent();
-            this.DataContext = new VisualSimulationViewModel(team1, team2, king1, king2);
         }
     }
 }

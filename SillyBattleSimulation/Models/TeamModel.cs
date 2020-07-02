@@ -198,6 +198,15 @@ namespace SillyBattleSimulation.Models
         }
 
         /// <summary>
+        /// Adds an <see cref="WarriorModel"/> to the Team.
+        /// </summary>
+        /// <param name="model">The <see cref="WarriorModel"/> to Add.</param>
+        public void AddWarrior(WarriorModel model)
+        {
+            this.TeamMembers.Add(model);
+        }
+
+        /// <summary>
         /// Removes the first Warrior from the Team.
         /// </summary>
         public void RemoveWarrior()

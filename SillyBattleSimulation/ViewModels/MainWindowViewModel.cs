@@ -5,6 +5,7 @@
 namespace SillyBattleSimulation.ViewModels
 {
     using System;
+    using System.IO;
     using System.Windows;
     using System.Windows.Input;
     using System.Windows.Threading;
@@ -17,200 +18,122 @@ namespace SillyBattleSimulation.ViewModels
     /// </summary>
     public class MainWindowViewModel : BaseViewModel
     {
-        private bool ticking;
-        private ClockModel clock;
-        private WarriorModel kingA;
-        private WarriorModel kingB;
-        private TeamModel teamA;
-        private TeamModel teamB;
-        private BattleModel battleModel;
-        private DispatcherTimer timer = new DispatcherTimer();
-        private TimeSpan span = new TimeSpan(500);
+        private string succes;
+        private BaseViewModel currentView;
+        private bool switchero;
+        private TeamModel team1;
+        private TeamModel team2;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindowViewModel"/> class.
         /// </summary>
         public MainWindowViewModel()
         {
-            this.ticking = false;
-            this.timer.Interval = this.span;
-            this.timer.Tick += this.Timer_Tick;
-            this.clock = new ClockModel();
-            this.clock.Angle = 0.0;
-            this.teamA = new TeamModel();
-            this.teamB = new TeamModel();
-            this.battleModel = new BattleModel();
-            this.AddWarriorACommand = new Command(this.AddWarriorA);
-            this.AddWarriorBCommand = new Command(this.AddWarriorB);
-            this.BattleCommand = new Command(this.Battle);
-            this.VisualBattleWindowCommand = new Command(this.VisualBattleWindow);
+            // TODO: Load Teams from File
+            this.CurrentView = new SimulationViewModel(this.team1, this.team2);
+            this.switchero = false;
+            this.ChangeViewCommand = new Command(this.ChangeView);
+
+            this.Succes = "HI";
+            this.team1 = new TeamModel();
+            this.team2 = new TeamModel();
+            this.LoadTeam(this.team1);
+            this.LoadTeam(this.team2);
         }
 
         /// <summary>
-        /// Gets the Command to add an Warrior to TeamA.
+        /// Gets or sets a string to show Succes.
         /// </summary>
-        public ICommand AddWarriorACommand { get; private set; }
-
-        /// <summary>
-        /// Gets the Command to add an Warrior to Teamb.
-        /// </summary>
-        public ICommand AddWarriorBCommand { get; private set; }
-
-        /// <summary>
-        /// Gets the Command to do Battle.
-        /// </summary>
-        public ICommand BattleCommand { get; private set; }
-
-        /// <summary>
-        /// Gets the Command to do open a new Window to show visual Battle.
-        /// </summary>
-        public ICommand VisualBattleWindowCommand { get; private set; }
-
-        /// <summary>
-        /// Gets or sets the Clock.
-        /// </summary>
-        public ClockModel Clock
+        public string Succes
         {
-            get => this.clock;
-            set => this.SetProperty(ref this.clock, value);
+            get => this.succes;
+            set => this.SetProperty(ref this.succes, value);
         }
 
         /// <summary>
-        /// Gets or sets the King of Team A.
+        /// Gets the Command to change the View.
         /// </summary>
-        public WarriorModel KingA
-        {
-            get => this.kingA;
-            set => this.SetProperty(ref this.kingA, value);
-        }
+        public ICommand ChangeViewCommand { get; private set; }
 
         /// <summary>
-        /// Gets or sets the King of Team B.
+        /// Gets or sets the currently selected Viewmodel.
         /// </summary>
-        public WarriorModel KingB
+        public BaseViewModel CurrentView
         {
-            get => this.kingB;
-            set => this.SetProperty(ref this.kingB, value);
+            get => this.currentView;
+            set => this.SetProperty(ref this.currentView, value);
         }
 
-        /// <summary>
-        /// Gets or sets the Model of the first Team.
-        /// </summary>
-        public TeamModel TeamA
+        private void ChangeView(object commandParameter)
         {
-            get => this.teamA;
-            set => this.SetProperty(ref this.teamA, value);
-        }
-
-        /// <summary>
-        /// Gets or sets the Model of the second Team.
-        /// </summary>
-        public TeamModel TeamB
-        {
-            get => this.teamB;
-            set => this.SetProperty(ref this.teamB, value);
-        }
-
-        private void AddWarriorA(object commandParameter)
-        {
-            if (!this.ticking)
+            if (this.switchero)
             {
-                for (int i = 0; i < 25; i++)
-                {
-                    this.TeamA.AddRandomWarrior();
-                }
-            }
-        }
+                this.team1 = this.CurrentView.Unload(1);
+                this.team2 = this.CurrentView.Unload(2);
+                this.SaveTeam(this.team1);
+                this.SaveTeam(this.team2);
 
-        private void AddWarriorB(object commandParameter)
-        {
-            if (!this.ticking)
-            {
-                for (int i = 0; i < 25; i++)
-                {
-                    this.TeamB.AddRandomWarrior();
-                }
-            }
-        }
-
-        private void Battle(object commandParameter)
-        {
-            if (this.ticking)
-            {
-                this.timer.Stop();
+                // TODO: Get current Teams and save them to file
+                this.CurrentView = new SimulationViewModel(this.team1, this.team2);
+                this.switchero = false;
             }
             else
             {
-                this.timer.Start();
+                this.team1 = this.CurrentView.Unload(1);
+                this.team2 = this.CurrentView.Unload(2);
+                this.SaveTeam(this.team1);
+                this.SaveTeam(this.team2);
+
+                // TODO: Get current Teams and save them to file
+                this.CurrentView = new VisualSimulationViewModel(this.team1, this.team2);
+                this.switchero = true;
+            }
+        }
+
+        private void LoadTeam(TeamModel team)
+        {
+            string file;
+            if (team == this.team1)
+            {
+                file = "../../Files/Team1.txt";
+            }
+            else
+            {
+                file = "../../Files/Team2.txt";
             }
 
-            this.ticking = !this.ticking;
-        }
-
-        private void VisualBattleWindow(object commandParameter)
-        {
-            VisualSimulationView visualSimulationView = new VisualSimulationView(this.TeamA, this.TeamB, this.KingA, this.KingB);
-            visualSimulationView.Show();
-        }
-
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            this.Clock.Angle++;
-            if (this.Clock.Angle % 360 == 0)
+            try
             {
-                try
-                {
-                    if (this.TeamA.TeamSize > 0 && this.KingA != null)
-                    {
-                        this.battleModel.Battle(this.TeamA.TeamMembers[0], this.KingA);
-                        if (this.TeamA.TeamMembers[0].CurrentHealth <= 0)
-                        {
-                            this.TeamA.RemoveWarrior(this.TeamA.TeamMembers[0]);
-                        }
+                var fs = File.Open(file, FileMode.Open, FileAccess.Read);
+                StreamReader sr = new StreamReader(fs);
+            }
+            catch
+            {
+                this.Succes = team.ToString();
+            }
+        }
 
-                        if (this.KingA.CurrentHealth <= 0)
-                        {
-                            this.KingA = this.TeamA.TeamMembers[0];
-                            this.TeamA.RemoveWarrior(this.TeamA.TeamMembers[0]);
-                        }
-                    }
-                    else if (this.TeamA.TeamSize > 0 && this.KingA == null)
-                    {
-                        this.KingA = this.TeamA.TeamMembers[0];
-                        this.TeamA.RemoveWarrior(this.TeamA.TeamMembers[0]);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
+        private void SaveTeam(TeamModel team)
+        {
+            string file;
+            if (team == this.team1)
+            {
+                file = "../../Files/Team1.txt";
+            }
+            else
+            {
+                file = "../../Files/Team2.txt";
+            }
 
-                try
-                {
-                    if (this.TeamB.TeamSize > 0 && this.KingB != null)
-                    {
-                        this.battleModel.Battle(this.TeamB.TeamMembers[0], this.KingB);
-                        if (this.TeamB.TeamMembers[0].CurrentHealth <= 0)
-                        {
-                            this.TeamB.RemoveWarrior(this.TeamB.TeamMembers[0]);
-                        }
-
-                        if (this.KingB.CurrentHealth <= 0)
-                        {
-                            this.KingB = this.TeamB.TeamMembers[0];
-                            this.TeamB.RemoveWarrior(this.TeamB.TeamMembers[0]);
-                        }
-                    }
-                    else if (this.TeamB.TeamSize > 0 && this.KingB == null)
-                    {
-                        this.KingB = this.TeamB.TeamMembers[0];
-                        this.TeamB.RemoveWarrior(this.TeamB.TeamMembers[0]);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
+            try
+            {
+                StreamWriter sw = new StreamWriter(file);
+                sw.WriteLine(file);
+                sw.Close();
+            }
+            finally
+            {
+                this.Succes = "hallo";
             }
         }
     }

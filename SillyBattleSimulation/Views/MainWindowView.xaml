@@ -1,114 +1,31 @@
-﻿<Window x:Class="SillyBattleSimulation.MainWindowView"
+﻿<Window x:Class="SillyBattleSimulation.Views.MainWindowView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SillyBattleSimulation"
+        xmlns:local="clr-namespace:SillyBattleSimulation" 
+        xmlns:Views="clr-namespace:SillyBattleSimulation.Views"
+        xmlns:ViewModels="clr-namespace:SillyBattleSimulation.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0">
-            <Label Content="Team A"/>
-            <Button Content="+"
-                    Command="{Binding Path=AddWarriorACommand}"
-                    Margin="5"/>
-            <Label Content="{Binding TeamA.TeamSize}"/>
-            <Label Content="Team B"/>
-            <Button Content="+"
-                    Command="{Binding Path=AddWarriorBCommand}"
-                    Margin="5"/>
-            <Label Content="{Binding TeamB.TeamSize}"/>
-        </StackPanel>
-        <StackPanel Grid.Column="1">
-            <Label Content="King:"/>
-            <WrapPanel>
-                <Label Content="Health:"/>
-                <Label Content="{Binding KingA.CurrentHealth}"/>
-                <Label Content="Strength:"/>
-                <Label Content="{Binding KingA.Strength}"/>
-                <Label Content="Defence:"/>
-                <Label Content="{Binding KingA.Defence}"/>
-                <!--<Label Content="Awarenes:"/>
-                            <Label Content="{Binding KingB.Awarenes}"/>-->
-            </WrapPanel>
-            <ListView ItemsSource="{Binding TeamA.TeamMembers}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <WrapPanel>
-                            <Label Content="Health:"/>
-                            <Label Content="{Binding CurrentHealth}"/>
-                            <Label Content="Strength:"/>
-                            <Label Content="{Binding Strength}"/>
-                            <Label Content="Defence:"/>
-                            <Label Content="{Binding Defence}"/>
-                            <!--<Label Content="Awarenes:"/>
-                            <Label Content="{Binding Awarenes}"/>-->
-                        </WrapPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackPanel>
-        <StackPanel Grid.Column="2">
-            <Label Content="King:"/>
-            <WrapPanel>
-                <Label Content="Health:"/>
-                <Label Content="{Binding KingB.CurrentHealth}"/>
-                <Label Content="Strength:"/>
-                <Label Content="{Binding KingB.Strength}"/>
-                <Label Content="Defence:"/>
-                <Label Content="{Binding KingB.Defence}"/>
-                <!--<Label Content="Awarenes:"/>
-                            <Label Content="{Binding KingB.Awarenes}"/>-->
-            </WrapPanel>
-            <ListView ItemsSource="{Binding TeamB.TeamMembers}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <WrapPanel>
-                            <Label Content="Health:"/>
-                            <Label Content="{Binding CurrentHealth}"/>
-                            <Label Content="Strength:"/>
-                            <Label Content="{Binding Strength}"/>
-                            <Label Content="Defence:"/>
-                            <Label Content="{Binding Defence}"/>
-                            <!--<Label Content="Awarenes:"/>
-                            <Label Content="{Binding Awarenes}"/>-->
-                        </WrapPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackPanel>
-        <StackPanel Grid.Column="3" 
-                    VerticalAlignment="Bottom">
-            <Button Content="BATTLE!" 
-                    Command="{Binding Path=BattleCommand}"
-                    Margin="15"/>
-            <Button Content="BATTLE!~Visual~" 
-                    Command="{Binding Path=VisualBattleWindowCommand}"
-                    Margin="15"/>
-            <Label Content="{Binding Clock.Angle}"/>
-        </StackPanel>
-        <DockPanel Grid.Column="3" 
-                    VerticalAlignment="Top" HorizontalAlignment="Center">
-            <Ellipse Height="100" Width="100"
-                     Stroke="Black" 
-                     Margin="20"/>
-        </DockPanel>
-        <DockPanel Grid.Column="3" 
-                    VerticalAlignment="Top" HorizontalAlignment="Center">
-            <Rectangle Width="2" Height="50" 
-                       Stroke="Black"
-                       Margin="20"
-                       RadiusX="1" RadiusY="1" RenderTransformOrigin="0.5,1">
-                <Rectangle.RenderTransform>
-                    <RotateTransform CenterX="0" Angle="{Binding Clock.Angle}"/>
-                </Rectangle.RenderTransform>
-            </Rectangle>
-        </DockPanel>
-    </Grid>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type ViewModels:SimulationViewModel}">
+            <Views:SimulationView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModels:VisualSimulationViewModel}">
+            <Views:VisualSimulationView />
+        </DataTemplate>
+    </Window.Resources>
+    <DockPanel>
+        <ToolBarTray DockPanel.Dock="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
+            <ToolBar>
+                <Button Content="Switch" Command="{Binding ChangeViewCommand}"/>
+            </ToolBar>
+            <ToolBar>
+                <Label Content="{Binding Succes}"/>
+            </ToolBar>
+        </ToolBarTray>
+        <ContentControl Content="{Binding CurrentView}"/>
+    </DockPanel>
+    
 </Window>

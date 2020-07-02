@@ -29,6 +29,37 @@ namespace SillyBattleSimulation.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="VisualSimulationViewModel"/> class.
         /// </summary>
+        /// <param name="team1">The first Team.</param>
+        /// <param name="team2">The second Team.</param>
+        public VisualSimulationViewModel(TeamModel team1, TeamModel team2)
+        {
+            // Initialisierung
+            this.Team1 = new VisualTeamModel(team1, Brushes.Red);
+            this.Team2 = new VisualTeamModel(team2, Brushes.Blue);
+            this.Team2.MoveTeamVorward(250);
+            this.Team2.TurnTeam(true);
+            this.Team2.TurnTeam(true);
+
+            this.BattleCommand = new Command(this.Battle);
+
+            this.visualBattle = new VisualBattleModel();
+
+            // Anfangspositionen
+            // this.King1.PositionX = 5;
+            // this.King1.PositionY = 5;
+
+            // this.King2.PositionX = 55;
+            // this.King2.PositionY = 5;
+
+            // Timer
+            this.ticking = false;
+            this.timer.Interval = this.time;
+            this.timer.Tick += this.Timer_Tick;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VisualSimulationViewModel"/> class.
+        /// </summary>
         /// <param name="team1"><see cref="Team1"/>.</param>
         /// <param name="team2"><see cref="Team2"/>.</param>
         /// <param name="king1"><see cref="King1"/>.</param>
@@ -101,6 +132,32 @@ namespace SillyBattleSimulation.ViewModels
         {
             get => this.king2;
             set => this.SetProperty(ref this.king2, value);
+        }
+
+        /// <summary>
+        /// Method to call on Unloading to receive the Teams.
+        /// </summary>
+        /// <param name="team">Which Team to receive.</param>
+        /// <returns>The returned Team.</returns>
+        public TeamModel Unload(int team)
+        {
+            TeamModel model = new TeamModel();
+            if (team == 1)
+            {
+                foreach (var item in this.Team1.TeamMembers)
+                {
+                    model.AddWarrior(item);
+                }
+            }
+            else
+            {
+                foreach (var item in this.Team2.TeamMembers)
+                {
+                    model.AddWarrior(item);
+                }
+            }
+
+            return model;
         }
 
         private void Battle(object commandParameter)
