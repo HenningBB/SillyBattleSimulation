@@ -69,8 +69,8 @@ namespace SillyBattleSimulation.ViewModels
 
         private void SaveTeams(TeamModel team1, TeamModel team2)
         {
-            var fs1 = File.Open("../../Team1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            var fs2 = File.Open("../../Team2.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            var fs1 = File.Open("../../Files/Team1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            var fs2 = File.Open("../../Files/Team2.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
             try
             {
                 StreamWriter sw = new StreamWriter(fs1);
