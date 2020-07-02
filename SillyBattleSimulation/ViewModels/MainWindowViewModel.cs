@@ -9,6 +9,7 @@ namespace SillyBattleSimulation.ViewModels
     using System.Windows;
     using System.Windows.Input;
     using System.Windows.Threading;
+    using Microsoft.VisualBasic.FileIO;
     using SillyBattleSimulation.Commands;
     using SillyBattleSimulation.Models;
     using SillyBattleSimulation.Views;
@@ -69,8 +70,8 @@ namespace SillyBattleSimulation.ViewModels
 
         private void SaveTeams(TeamModel team1, TeamModel team2)
         {
-            var fs1 = File.Open("../../Files/Team1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            var fs2 = File.Open("../../Files/Team2.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            var fs1 = File.Open("../../Files/Team1.txt", FileMode.Open, FileAccess.Write);
+            var fs2 = File.Open("../../Files/Team2.txt", FileMode.Open, FileAccess.Write);
             try
             {
                 StreamWriter sw = new StreamWriter(fs1);
@@ -102,17 +103,29 @@ namespace SillyBattleSimulation.ViewModels
 
         private void LoadTeam(TeamModel team1, TeamModel team2)
         {
-            var fs1 = File.Open("../../Team1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            var fs2 = File.Open("../../Team2.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            var fs1 = File.Open("../../Team1.txt", FileMode.Open, FileAccess.Read);
+            var fs2 = File.Open("../../Team2.txt", FileMode.Open, FileAccess.Read);
             try
             {
-                StreamWriter sw = new StreamWriter(fs1);
-                foreach (var item in team1.TeamMembers)
+                StreamReader sr = new StreamReader(fs1);
+                string filePath = sr.ReadToEnd();
+                sr.Close();
+                var textFieldParser = new TextFieldParser(filePath)
+                { Delimiters = new string[] { " " } };
+
+                while (!textFieldParser.EndOfData)
                 {
-                    sw.WriteLine(item.MaxHealth + " " + item.CurrentHealth + " " + item.Strength + " " + item.Defence + " " + item.Awarenes);
+                    var entry = textFieldParser.ReadFields();
+                    WarriorModel warrior = new WarriorModel();
+                    warrior.MaxHealth = Convert.ToInt16(entry[0]);
+                    warrior.CurrentHealth = Convert.ToInt16(entry[1]);
+                    warrior.Strength = Convert.ToInt16(entry[2]);
+                    warrior.Defence = Convert.ToInt16(entry[3]);
+                    warrior.Awarenes = Convert.ToInt16(entry[4]);
+                    team1.AddWarrior(warrior);
                 }
 
-                sw.Close();
+                textFieldParser.Close();
             }
             catch
             {
@@ -120,13 +133,25 @@ namespace SillyBattleSimulation.ViewModels
 
             try
             {
-                StreamWriter sw = new StreamWriter(fs2);
-                foreach (var item in team2.TeamMembers)
+                StreamReader sr = new StreamReader(fs2);
+                string filePath = sr.ReadToEnd();
+                sr.Close();
+                var textFieldParser = new TextFieldParser(filePath)
+                { Delimiters = new string[] { " " } };
+
+                while (!textFieldParser.EndOfData)
                 {
-                    sw.WriteLine(item.MaxHealth + " " + item.CurrentHealth + " " + item.Strength + " " + item.Defence + " " + item.Awarenes);
+                    var entry = textFieldParser.ReadFields();
+                    WarriorModel warrior = new WarriorModel();
+                    warrior.MaxHealth = Convert.ToInt16(entry[0]);
+                    warrior.CurrentHealth = Convert.ToInt16(entry[1]);
+                    warrior.Strength = Convert.ToInt16(entry[2]);
+                    warrior.Defence = Convert.ToInt16(entry[3]);
+                    warrior.Awarenes = Convert.ToInt16(entry[4]);
+                    team2.AddWarrior(warrior);
                 }
 
-                sw.Close();
+                textFieldParser.Close();
             }
             catch
             {

@@ -198,6 +198,16 @@ namespace SillyBattleSimulation.Models
         }
 
         /// <summary>
+        /// Generates a new Warrior for the Team.
+        /// </summary>
+        /// <param name="warrior">The Warrior to be added.</param>
+        public void AddWarrior(WarriorModel warrior)
+        {
+            this.TeamMembers.Add(warrior);
+            this.TeamSize = this.TeamMembers.Count;
+        }
+
+        /// <summary>
         /// Removes the first Warrior from the Team.
         /// </summary>
         public void RemoveWarrior()
