@@ -242,23 +242,8 @@ namespace SillyBattleSimulation.ViewModels
                     this.Team2.RemoveVisualWarrior(item);
                 }
 
-                if (this.Team1.TeamSize > 0)
-                {
-                    this.Team1.PlaceWarriors();
-                }
-                else
-                {
-                    this.timer.Stop();
-                }
-
-                if (this.Team2.TeamSize > 0)
-                {
-                    this.Team2.PlaceWarriors();
-                }
-                else
-                {
-                    this.timer.Stop();
-                }
+                this.Team1.PLaceWarriors();
+                this.Team2.PLaceWarriors();
 
                 steps = 6;
                 this.Team1.MoveTeamVorward(steps);
