@@ -19,9 +19,10 @@
 
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top">
-            <ToolBar></ToolBar>
+            <ToolBar>
+                <Button Content="Switch" Command="{Binding ChangeViewmodelCommand}"/>
+            </ToolBar>
         </ToolBarTray>
-        <ContentControl Content="{Binding Simulation}" DockPanel.Dock="Top"/>
-        <ContentControl Content="{Binding VisualSimulation}" DockPanel.Dock="Top"/>
+        <ContentControl Content="{Binding CurrentViewModel}" DockPanel.Dock="Top"/>
     </DockPanel>
 </Window>
