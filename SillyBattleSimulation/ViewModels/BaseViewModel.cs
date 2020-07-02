@@ -18,7 +18,6 @@ namespace SillyBattleSimulation.ViewModels
     /// </summary>
     public class BaseViewModel : INotifyPropertyChanged
     {
-
         /// <inheritdoc/>
         public event PropertyChangedEventHandler PropertyChanged;
 

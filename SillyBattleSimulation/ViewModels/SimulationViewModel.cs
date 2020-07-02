@@ -51,6 +51,8 @@ namespace SillyBattleSimulation.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="SimulationViewModel"/> class.
         /// </summary>
+        /// <param name="team1">The first Team.</param>
+        /// <param name="team2">The second Team.</param>
         public SimulationViewModel(TeamModel team1, TeamModel team2)
         {
             this.ticking = false;
@@ -200,7 +202,7 @@ namespace SillyBattleSimulation.ViewModels
                         this.TeamA.RemoveWarrior(this.TeamA.TeamMembers[0]);
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
                 }
 
@@ -226,7 +228,7 @@ namespace SillyBattleSimulation.ViewModels
                         this.TeamB.RemoveWarrior(this.TeamB.TeamMembers[0]);
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
                 }
             }

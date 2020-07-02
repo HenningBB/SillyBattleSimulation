@@ -83,7 +83,6 @@ namespace SillyBattleSimulation.ViewModels
             }
             catch
             {
-
             }
 
             try
@@ -98,7 +97,6 @@ namespace SillyBattleSimulation.ViewModels
             }
             catch
             {
-
             }
         }
 
@@ -118,7 +116,6 @@ namespace SillyBattleSimulation.ViewModels
             }
             catch
             {
-
             }
 
             try
@@ -133,7 +130,6 @@ namespace SillyBattleSimulation.ViewModels
             }
             catch
             {
-
             }
         }
     }
