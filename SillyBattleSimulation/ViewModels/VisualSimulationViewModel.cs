@@ -28,6 +28,28 @@ namespace SillyBattleSimulation.ViewModels
 
         public VisualSimulationViewModel()
         {
+            // Initialisierung
+            this.Team1 = new VisualTeamModel(team1, Brushes.Red);
+            this.Team2 = new VisualTeamModel(team2, Brushes.Blue);
+            this.Team2.MoveTeamVorward(250);
+            this.Team2.TurnTeam(true);
+            this.Team2.TurnTeam(true);
+
+            this.BattleCommand = new Command(this.Battle);
+
+            this.visualBattle = new VisualBattleModel();
+
+            // Anfangspositionen
+            // this.King1.PositionX = 5;
+            // this.King1.PositionY = 5;
+
+            // this.King2.PositionX = 55;
+            // this.King2.PositionY = 5;
+
+            // Timer
+            this.ticking = false;
+            this.timer.Interval = this.time;
+            this.timer.Tick += this.Timer_Tick;
         }
 
         /// <summary>

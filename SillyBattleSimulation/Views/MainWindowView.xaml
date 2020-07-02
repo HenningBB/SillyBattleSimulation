@@ -16,12 +16,12 @@
             <Views:VisualSimulationView />
         </DataTemplate>
     </Window.Resources>
-    <TabControl>
-        <TabItem>
-            <ContentControl Content="{Binding Simulation}"/>            
-        </TabItem>
-        <TabItem>
-            <ContentControl Content="{Binding VisualSimulation}"/>
-        </TabItem>
-    </TabControl>    
+
+    <DockPanel>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar></ToolBar>
+        </ToolBarTray>
+        <ContentControl Content="{Binding Simulation}" DockPanel.Dock="Top"/>
+        <ContentControl Content="{Binding VisualSimulation}" DockPanel.Dock="Top"/>
+    </DockPanel>
 </Window>
