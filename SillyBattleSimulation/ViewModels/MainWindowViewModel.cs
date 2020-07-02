@@ -55,22 +55,81 @@ namespace SillyBattleSimulation.ViewModels
         {
             if (!this.change)
             {
-                this.CurrentViewModel = new VisualSimulationViewModel(this.CurrentViewModel.Unload(1), this.CurrentViewModel.Unload(2));
+                this.SaveTeams(this.team1, this.team2);
+                this.CurrentViewModel = new VisualSimulationViewModel(this.team1, this.team2);
             }
             else
             {
-                this.CurrentViewModel = new SimulationViewModel(this.CurrentViewModel.Unload(1), this.CurrentViewModel.Unload(2));
+                this.SaveTeams(this.team1, this.team2);
+                this.CurrentViewModel = new SimulationViewModel(this.team1, this.team2);
             }
 
             this.change = !this.change;
         }
 
-        private void SaveTeams(TeamModel team1,TeamModel team2)
+        private void SaveTeams(TeamModel team1, TeamModel team2)
         {
-            var fs = File.Open("file.name", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            var fs1 = File.Open("../../Team1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            var fs2 = File.Open("../../Team2.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
             try
             {
-                StreamWriter sw = new StreamWriter(fs);
+                StreamWriter sw = new StreamWriter(fs1);
+                foreach (var item in team1.TeamMembers)
+                {
+                    sw.WriteLine(item.MaxHealth + " " + item.CurrentHealth + " " + item.Strength + " " + item.Defence + " " + item.Awarenes);
+                }
+
+                sw.Close();
+            }
+            catch
+            {
+
+            }
+
+            try
+            {
+                StreamWriter sw = new StreamWriter(fs2);
+                foreach (var item in team2.TeamMembers)
+                {
+                    sw.WriteLine(item.MaxHealth + " " + item.CurrentHealth + " " + item.Strength + " " + item.Defence + " " + item.Awarenes);
+                }
+
+                sw.Close();
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void LoadTeam(TeamModel team1, TeamModel team2)
+        {
+            var fs1 = File.Open("../../Team1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            var fs2 = File.Open("../../Team2.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            try
+            {
+                StreamWriter sw = new StreamWriter(fs1);
+                foreach (var item in team1.TeamMembers)
+                {
+                    sw.WriteLine(item.MaxHealth + " " + item.CurrentHealth + " " + item.Strength + " " + item.Defence + " " + item.Awarenes);
+                }
+
+                sw.Close();
+            }
+            catch
+            {
+
+            }
+
+            try
+            {
+                StreamWriter sw = new StreamWriter(fs2);
+                foreach (var item in team2.TeamMembers)
+                {
+                    sw.WriteLine(item.MaxHealth + " " + item.CurrentHealth + " " + item.Strength + " " + item.Defence + " " + item.Awarenes);
+                }
+
+                sw.Close();
             }
             catch
             {

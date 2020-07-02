@@ -98,16 +98,6 @@ namespace SillyBattleSimulation.ViewModels
             set => this.SetProperty(ref this.king2, value);
         }
 
-        /// <summary>
-        /// Returns the mentioned Team on Unloading the ViewModel.
-        /// </summary>
-        /// <param name="team">The Team to load.</param>
-        /// <returns>a <see cref="TeamModel"/>.</returns>
-        public TeamModel Unload(int team)
-        {
-            return this.team1;
-        }
-
         private void Battle(object commandParameter)
         {
             if (this.ticking)
