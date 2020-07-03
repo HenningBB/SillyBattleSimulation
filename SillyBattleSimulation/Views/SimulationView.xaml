@@ -89,9 +89,6 @@
             <Button Content="BATTLE!" 
                     Command="{Binding Path=BattleCommand}"
                     Margin="15"/>
-            <Button Content="BATTLE!~Visual~" 
-                    Command="{Binding Path=VisualBattleWindowCommand}"
-                    Margin="15"/>
             <Label Content="{Binding Clock.Angle}"/>
         </StackPanel>
         <DockPanel Grid.Column="3" 

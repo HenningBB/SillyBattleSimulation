@@ -45,7 +45,6 @@ namespace SillyBattleSimulation.ViewModels
             this.AddWarriorACommand = new Command(this.AddWarriorA);
             this.AddWarriorBCommand = new Command(this.AddWarriorB);
             this.BattleCommand = new Command(this.Battle);
-            this.VisualBattleWindowCommand = new Command(this.VisualBattleWindow);
         }
 
         /// <summary>
@@ -66,7 +65,6 @@ namespace SillyBattleSimulation.ViewModels
             this.AddWarriorACommand = new Command(this.AddWarriorA);
             this.AddWarriorBCommand = new Command(this.AddWarriorB);
             this.BattleCommand = new Command(this.Battle);
-            this.VisualBattleWindowCommand = new Command(this.VisualBattleWindow);
         }
 
         /// <summary>
@@ -168,11 +166,6 @@ namespace SillyBattleSimulation.ViewModels
             }
 
             this.ticking = !this.ticking;
-        }
-
-        private void VisualBattleWindow(object commandParameter)
-        {
-            // TODO: Change the VM that is active.
         }
 
         private void Timer_Tick(object sender, EventArgs e)
