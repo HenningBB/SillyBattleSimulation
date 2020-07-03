@@ -31,6 +31,7 @@ namespace SillyBattleSimulation.ViewModels
         {
             this.team1 = new TeamModel();
             this.team2 = new TeamModel();
+            this.LoadTeam(this.team1, this.team2);
             this.CurrentViewModel = new SimulationViewModel(this.team1, this.team2);
 
             this.ChangeViewmodelCommand = new Command(this.ChangeViewModel);
@@ -70,8 +71,8 @@ namespace SillyBattleSimulation.ViewModels
 
         private void SaveTeams(TeamModel team1, TeamModel team2)
         {
-            var fs1 = File.Open("../../Files/Team1.txt", FileMode.Open, FileAccess.Write);
-            var fs2 = File.Open("../../Files/Team2.txt", FileMode.Open, FileAccess.Write);
+            var fs1 = File.Open("../../Files/Team1.txt", FileMode.Create, FileAccess.Write);
+            var fs2 = File.Open("../../Files/Team2.txt", FileMode.Create, FileAccess.Write);
             try
             {
                 StreamWriter sw = new StreamWriter(fs1);
@@ -103,14 +104,11 @@ namespace SillyBattleSimulation.ViewModels
 
         private void LoadTeam(TeamModel team1, TeamModel team2)
         {
-            var fs1 = File.Open("../../Team1.txt", FileMode.Open, FileAccess.Read);
-            var fs2 = File.Open("../../Team2.txt", FileMode.Open, FileAccess.Read);
+            var fs1 = File.Open("../../Files/Team1.txt", FileMode.Open, FileAccess.Read);
+            var fs2 = File.Open("../../Files/Team2.txt", FileMode.Open, FileAccess.Read);
             try
             {
-                StreamReader sr = new StreamReader(fs1);
-                string filePath = sr.ReadToEnd();
-                sr.Close();
-                var textFieldParser = new TextFieldParser(filePath)
+                var textFieldParser = new TextFieldParser(fs1)
                 { Delimiters = new string[] { " " } };
 
                 while (!textFieldParser.EndOfData)
@@ -127,16 +125,14 @@ namespace SillyBattleSimulation.ViewModels
 
                 textFieldParser.Close();
             }
-            catch
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
             }
 
             try
             {
-                StreamReader sr = new StreamReader(fs2);
-                string filePath = sr.ReadToEnd();
-                sr.Close();
-                var textFieldParser = new TextFieldParser(filePath)
+                var textFieldParser = new TextFieldParser(fs2)
                 { Delimiters = new string[] { " " } };
 
                 while (!textFieldParser.EndOfData)

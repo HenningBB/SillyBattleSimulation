@@ -60,8 +60,8 @@ namespace SillyBattleSimulation.ViewModels
             this.timer.Tick += this.Timer_Tick;
             this.clock = new ClockModel();
             this.clock.Angle = 0.0;
-            this.teamA = team1;
-            this.teamB = team2;
+            this.TeamA = team1;
+            this.TeamB = team2;
             this.battleModel = new BattleModel();
             this.AddWarriorACommand = new Command(this.AddWarriorA);
             this.AddWarriorBCommand = new Command(this.AddWarriorB);

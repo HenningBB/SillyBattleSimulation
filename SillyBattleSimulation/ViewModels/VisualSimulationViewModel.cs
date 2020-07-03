@@ -16,8 +16,8 @@ namespace SillyBattleSimulation.ViewModels
     /// </summary>
     public class VisualSimulationViewModel : BaseViewModel
     {
-        private VisualTeamModel team1;
-        private VisualTeamModel team2;
+        private VisualTeamModel teamA;
+        private VisualTeamModel teamB;
         private VisualWarriorModel king1;
         private VisualWarriorModel king2;
         private VisualBattleModel visualBattle;
@@ -29,16 +29,16 @@ namespace SillyBattleSimulation.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="VisualSimulationViewModel"/> class.
         /// </summary>
-        /// <param name="team1"><see cref="Team1"/>.</param>
-        /// <param name="team2"><see cref="Team2"/>.</param>
+        /// <param name="team1"><see cref="TeamA"/>.</param>
+        /// <param name="team2"><see cref="TeamB"/>.</param>
         public VisualSimulationViewModel(TeamModel team1, TeamModel team2)
         {
             // Initialisierung
-            this.Team1 = new VisualTeamModel(team1, Brushes.Red);
-            this.Team2 = new VisualTeamModel(team2, Brushes.Blue);
-            this.Team2.MoveTeamVorward(250);
-            this.Team2.TurnTeam(true);
-            this.Team2.TurnTeam(true);
+            this.TeamA = new VisualTeamModel(team1, Brushes.Red);
+            this.TeamB = new VisualTeamModel(team2, Brushes.Blue);
+            this.TeamB.MoveTeamVorward(250);
+            this.TeamB.TurnTeam(true);
+            this.TeamB.TurnTeam(true);
 
             this.BattleCommand = new Command(this.Battle);
 
@@ -65,19 +65,19 @@ namespace SillyBattleSimulation.ViewModels
         /// <summary>
         /// Gets or sets the first Team.
         /// </summary>
-        public VisualTeamModel Team1
+        public VisualTeamModel TeamA
         {
-            get => this.team1;
-            set => this.SetProperty(ref this.team1, value);
+            get => this.teamA;
+            set => this.SetProperty(ref this.teamA, value);
         }
 
         /// <summary>
         /// Gets or sets the second Team.
         /// </summary>
-        public VisualTeamModel Team2
+        public VisualTeamModel TeamB
         {
-            get => this.team2;
-            set => this.SetProperty(ref this.team2, value);
+            get => this.teamB;
+            set => this.SetProperty(ref this.teamB, value);
         }
 
         /// <summary>
@@ -116,45 +116,45 @@ namespace SillyBattleSimulation.ViewModels
         {
             short steps;
 
-            if (this.Team1.VisualTeamMembers[0].PositionX < this.Team2.VisualTeamMembers[0].PositionX)
+            if (this.TeamA.VisualTeamMembers[0].PositionX < this.TeamB.VisualTeamMembers[0].PositionX)
             {
                 switch (this.ticker)
                 {
                     case 0:
                         steps = 2;
-                        this.Team1.MoveTeamVorward(steps);
-                        this.Team2.MoveTeamVorward(steps);
+                        this.TeamA.MoveTeamVorward(steps);
+                        this.TeamB.MoveTeamVorward(steps);
                         break;
                     case 1:
                         steps = 4;
-                        this.Team1.MoveTeamVorward(steps);
-                        this.Team2.MoveTeamVorward(steps);
+                        this.TeamA.MoveTeamVorward(steps);
+                        this.TeamB.MoveTeamVorward(steps);
                         break;
                     case 2:
                         steps = 8;
-                        this.Team1.MoveTeamVorward(steps);
-                        this.Team2.MoveTeamVorward(steps);
+                        this.TeamA.MoveTeamVorward(steps);
+                        this.TeamB.MoveTeamVorward(steps);
                         break;
                     default:
-                        this.Team1.MoveTeamVorward();
-                        this.Team2.MoveTeamVorward();
+                        this.TeamA.MoveTeamVorward();
+                        this.TeamB.MoveTeamVorward();
                         this.ticker = -1;
                         break;
                 }
             }
-            else if (this.Team1.VisualTeamMembers[0].PositionX > this.Team2.VisualTeamMembers[0].PositionX)
+            else if (this.TeamA.VisualTeamMembers[0].PositionX > this.TeamB.VisualTeamMembers[0].PositionX)
             {
                 steps = 6;
-                this.Team1.MoveTeamBackward(steps);
-                this.Team2.MoveTeamBackward(steps);
+                this.TeamA.MoveTeamBackward(steps);
+                this.TeamB.MoveTeamBackward(steps);
             }
             else
             {
-                this.visualBattle.Battle(this.Team1, this.Team2);
+                this.visualBattle.Battle(this.TeamA, this.TeamB);
 
                 VisualTeamModel delete1 = new VisualTeamModel();
                 VisualTeamModel delete2 = new VisualTeamModel();
-                foreach (var dead in this.Team1.VisualTeamMembers)
+                foreach (var dead in this.TeamA.VisualTeamMembers)
                 {
                     if (dead.CurrentHealth <= 0)
                     {
@@ -162,7 +162,7 @@ namespace SillyBattleSimulation.ViewModels
                     }
                 }
 
-                foreach (var dead in this.Team2.VisualTeamMembers)
+                foreach (var dead in this.TeamB.VisualTeamMembers)
                 {
                     if (dead.CurrentHealth <= 0)
                     {
@@ -172,26 +172,26 @@ namespace SillyBattleSimulation.ViewModels
 
                 foreach (var item in delete1.VisualTeamMembers)
                 {
-                    this.Team1.RemoveVisualWarrior(item);
+                    this.TeamA.RemoveVisualWarrior(item);
                 }
 
                 foreach (var item in delete2.VisualTeamMembers)
                 {
-                    this.Team2.RemoveVisualWarrior(item);
+                    this.TeamB.RemoveVisualWarrior(item);
                 }
 
-                if (this.Team1.TeamSize > 0)
+                if (this.TeamA.TeamSize > 0)
                 {
-                    this.Team1.PlaceWarriors();
+                    this.TeamA.PlaceWarriors();
                 }
                 else
                 {
                     this.timer.Stop();
                 }
 
-                if (this.Team2.TeamSize > 0)
+                if (this.TeamB.TeamSize > 0)
                 {
-                    this.Team2.PlaceWarriors();
+                    this.TeamB.PlaceWarriors();
                 }
                 else
                 {
@@ -199,8 +199,8 @@ namespace SillyBattleSimulation.ViewModels
                 }
 
                 steps = 6;
-                this.Team1.MoveTeamVorward(steps);
-                this.Team2.MoveTeamVorward(steps);
+                this.TeamA.MoveTeamVorward(steps);
+                this.TeamB.MoveTeamVorward(steps);
             }
 
             this.ticker++;
