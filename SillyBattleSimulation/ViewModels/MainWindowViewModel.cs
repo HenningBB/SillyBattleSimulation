@@ -71,10 +71,11 @@ namespace SillyBattleSimulation.ViewModels
 
         private void SaveTeams(TeamModel team1, TeamModel team2)
         {
-            var fs1 = File.Open("../../Files/Team1.txt", FileMode.Create, FileAccess.Write);
-            var fs2 = File.Open("../../Files/Team2.txt", FileMode.Create, FileAccess.Write);
             try
             {
+                var fs1 = File.Open("../../Files/Team1.txt", FileMode.Create, FileAccess.Write);
+                var fs2 = File.Open("../../Files/Team2.txt", FileMode.Create, FileAccess.Write);
+
                 StreamWriter sw = new StreamWriter(fs1);
                 foreach (var item in team1.TeamMembers)
                 {
@@ -82,14 +83,8 @@ namespace SillyBattleSimulation.ViewModels
                 }
 
                 sw.Close();
-            }
-            catch
-            {
-            }
 
-            try
-            {
-                StreamWriter sw = new StreamWriter(fs2);
+                sw = new StreamWriter(fs2);
                 foreach (var item in team2.TeamMembers)
                 {
                     sw.WriteLine(item.MaxHealth + " " + item.CurrentHealth + " " + item.Strength + " " + item.Defence + " " + item.Awarenes);
