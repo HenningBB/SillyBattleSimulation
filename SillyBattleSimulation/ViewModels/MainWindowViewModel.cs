@@ -21,6 +21,7 @@ namespace SillyBattleSimulation.ViewModels
     {
         private BaseViewModel currentViewModel;
         private bool change;
+        private bool world;
         private TeamModel team1;
         private TeamModel team2;
 
@@ -35,14 +36,21 @@ namespace SillyBattleSimulation.ViewModels
             this.CurrentViewModel = new SimulationViewModel(this.team1, this.team2);
 
             this.ChangeViewmodelCommand = new Command(this.ChangeViewModel);
+            this.DeployWorldCommand = new Command(this.DeployWorld);
 
             this.change = false;
+            this.world = false;
         }
 
         /// <summary>
         /// Gets the Command to change the current Viewmodel.
         /// </summary>
         public ICommand ChangeViewmodelCommand { get; private set; }
+
+        /// <summary>
+        /// Gets the Command to show/unshow the World Viewmodel.
+        /// </summary>
+        public ICommand DeployWorldCommand { get; private set; }
 
         /// <summary>
         /// Gets or sets the currently selected Viewmodel.
@@ -68,7 +76,30 @@ namespace SillyBattleSimulation.ViewModels
                 this.CurrentViewModel = new SimulationViewModel(this.team1, this.team2);
             }
 
+            this.world = false;
             this.change = !this.change;
+        }
+
+        private void DeployWorld(object commandParameter)
+        {
+            if (!this.world)
+            {
+                this.SaveTeams(this.team1, this.team2);
+                this.CurrentViewModel = new WorldViewModel();
+            }
+            else
+            {
+                if (this.change)
+                {
+                    this.CurrentViewModel = new VisualSimulationViewModel(this.team1, this.team2);
+                }
+                else
+                {
+                    this.CurrentViewModel = new SimulationViewModel(this.team1, this.team2);
+                }
+            }
+
+            this.world = !this.world;
         }
 
         private void SaveTeams(TeamModel team1, TeamModel team2)

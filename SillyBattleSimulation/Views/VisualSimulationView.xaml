@@ -30,7 +30,10 @@
                 </ListView.ItemTemplate>
             </ListView>
         </StackPanel>
-        <ItemsControl ItemsSource="{Binding TeamA.VisualTeamMembers}" Height="300" Grid.Column="1" VerticalAlignment="Top">
+        <ItemsControl ItemsSource="{Binding TeamA.VisualTeamMembers}"
+                      Height="300"
+                      Grid.Column="1"
+                      VerticalAlignment="Top">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Canvas IsItemsHost="True"/>
@@ -55,7 +58,10 @@
                     </Style>                    
                 </ItemsControl.ItemContainerStyle>
             </ItemsControl>
-        <ItemsControl ItemsSource="{Binding TeamB.VisualTeamMembers}" Height="300" Grid.Column="1" VerticalAlignment="Top">
+        <ItemsControl ItemsSource="{Binding TeamB.VisualTeamMembers}" 
+                      Height="300"
+                      Grid.Column="1" 
+                      VerticalAlignment="Top">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
                 <Canvas IsItemsHost="True"/>
@@ -80,7 +86,10 @@
             </Style>
         </ItemsControl.ItemContainerStyle>
         </ItemsControl>
-        <Button Content="~Battle~" Command="{Binding Path=BattleCommand}" Grid.Column="1" VerticalAlignment="Bottom"/>
+        <Button Content="~Battle~"
+                Command="{Binding Path=BattleCommand}" 
+                Grid.Column="1" 
+                VerticalAlignment="Bottom"/>
         <StackPanel Grid.Column="2">
             <ListView ItemsSource="{Binding TeamB.VisualTeamMembers}">
                 <ListView.ItemTemplate>
