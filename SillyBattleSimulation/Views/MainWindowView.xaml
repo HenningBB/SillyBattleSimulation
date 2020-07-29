@@ -18,6 +18,9 @@
         <DataTemplate DataType="{x:Type ViewModels:WorldViewModel}">
             <Views:WorldView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModels:CoolGraphViewModel}">
+            <Views:CoolGraphView />
+        </DataTemplate>
     </Window.Resources>
 
     <DockPanel>
@@ -27,6 +30,8 @@
                         Command="{Binding ChangeViewmodelCommand}"/>
                 <Button Content="World"
                         Command="{Binding DeployWorldCommand}"/>
+                <Button Content="Graph"
+                        Command="{Binding GraphCommand}"/>
             </ToolBar>
         </ToolBarTray>
         <ContentControl 
