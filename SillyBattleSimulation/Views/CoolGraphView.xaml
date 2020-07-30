@@ -5,33 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SillyBattleSimulation.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="{Binding Polo}" d:DesignWidth="{Binding GraphWidth}">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="3*" />
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" 
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-            <Label Content="{Binding Test}" />
-            <Button Content="Math Stuff"
-                Command="{Binding MathCommand}"/>
-            <Button Content="Mathic Stuff"
-                Command="{Binding MathicCommand}"/>
-            <Button Content="Mathix Stuff"
-                Command="{Binding MathixCommand}"/>
-            <Button Content="Mathox Stuff"
-                Command="{Binding MathoxCommand}"/>
-        </StackPanel>
-        
-        <Canvas Grid.Column="1"
-                HorizontalAlignment="Center"
+        <Canvas HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Width="{Binding GraphWidth}"
                 Height="{Binding GraphHeigth}"
                 Background="AntiqueWhite">
-            <ItemsControl ItemsSource="{Binding Polo}">
+            <ItemsControl ItemsSource="{Binding Segments}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Canvas />

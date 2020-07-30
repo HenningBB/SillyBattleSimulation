@@ -4,8 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SillyBattleSimulation.Views"
+        xmlns:Views="clr-namespace:SillyBattleSimulation.Views"
+        xmlns:ViewModels="clr-namespace:SillyBattleSimulation.ViewModels"
         mc:Ignorable="d"
         Height="450" Width="800">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type ViewModels:CoolGraphViewModel}">
+            <Views:CoolGraphView />
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -13,6 +20,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
+            <ContentControl Content="{Binding TeamAGraph}"/>
             <ListView ItemsSource="{Binding TeamA.VisualTeamMembers}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -91,6 +99,7 @@
                 Grid.Column="1" 
                 VerticalAlignment="Bottom"/>
         <StackPanel Grid.Column="2">
+            <ContentControl Content="{Binding TeamBGraph}"/>
             <ListView ItemsSource="{Binding TeamB.VisualTeamMembers}">
                 <ListView.ItemTemplate>
                     <DataTemplate>

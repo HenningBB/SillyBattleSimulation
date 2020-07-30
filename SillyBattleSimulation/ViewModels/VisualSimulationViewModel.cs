@@ -18,6 +18,8 @@ namespace SillyBattleSimulation.ViewModels
     {
         private VisualTeamModel teamA;
         private VisualTeamModel teamB;
+        private CoolGraphViewModel teamAGraph;
+        private CoolGraphViewModel teamBGraph;
         private VisualWarriorModel king1;
         private VisualWarriorModel king2;
         private VisualBattleModel visualBattle;
@@ -36,6 +38,8 @@ namespace SillyBattleSimulation.ViewModels
             // Initialisierung
             this.TeamA = new VisualTeamModel(team1, Brushes.Red);
             this.TeamB = new VisualTeamModel(team2, Brushes.Blue);
+            this.TeamAGraph = new CoolGraphViewModel(this.TeamA.TeamSize, 100);
+            this.TeamBGraph = new CoolGraphViewModel(this.TeamB.TeamSize, 100);
             this.TeamB.MoveTeamVorward(250);
             this.TeamB.TurnTeam(true);
             this.TeamB.TurnTeam(true);
@@ -61,6 +65,24 @@ namespace SillyBattleSimulation.ViewModels
         /// Gets the Command to do Battle.
         /// </summary>
         public ICommand BattleCommand { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the <see cref="CoolGraphViewModel"/> for the first Team.
+        /// </summary>
+        public CoolGraphViewModel TeamAGraph
+        {
+            get => this.teamAGraph;
+            set => this.SetProperty(ref this.teamAGraph, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the <see cref="CoolGraphViewModel"/> for the second Team.
+        /// </summary>
+        public CoolGraphViewModel TeamBGraph
+        {
+            get => this.teamBGraph;
+            set => this.SetProperty(ref this.teamBGraph, value);
+        }
 
         /// <summary>
         /// Gets or sets the first Team.

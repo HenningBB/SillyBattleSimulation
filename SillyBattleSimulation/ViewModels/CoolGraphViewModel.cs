@@ -22,10 +22,9 @@ namespace SillyBattleSimulation.ViewModels
     /// </summary>
     public class CoolGraphViewModel : BaseViewModel
     {
-        private string test;
         private int updateX;
         private int updateY;
-        private ObservableCollection<SegmentModel> polo;
+        private ObservableCollection<SegmentModel> segments;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CoolGraphViewModel"/> class.
@@ -34,59 +33,56 @@ namespace SillyBattleSimulation.ViewModels
         {
             this.GraphHeigth = 200; // inversed
             this.GraphWidth = 200;
-            this.Polo = new ObservableCollection<SegmentModel>();
-            this.Polo.Add(new SegmentModel(new Point(0, this.GraphHeigth), new Point(10, this.GraphHeigth)));
+            this.Segments = new ObservableCollection<SegmentModel>();
+            this.Segments.Add(new SegmentModel(new Point(0, this.GraphHeigth), new Point(10, this.GraphHeigth)));
             this.updateX = 10;
             this.updateY = this.GraphHeigth;
-            this.Test = "Hallo Welt";
             this.MathCommand = new Command(this.Mather);
-            this.MathicCommand = new Command(this.Mathic);
-            this.MathixCommand = new Command(this.Mathix);
-            this.MathoxCommand = new Command(this.Mathox);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CoolGraphViewModel"/> class.
+        /// </summary>
+        /// <param name="heigth">The value for <see cref="GraphHeigth"/>.</param>
+        /// <param name="width">The value for <see cref="GraphWidth"/>.</param>
+        public CoolGraphViewModel(int heigth, int width)
+        {
+            this.GraphHeigth = heigth * 10; // inversed
+            this.GraphWidth = width;
+            this.Segments = new ObservableCollection<SegmentModel>();
+            this.Segments.Add(new SegmentModel(new Point(0, 0), new Point(10, 0)));
+            this.updateX = 10;
+            this.updateY = 0;
+            this.MathCommand = new Command(this.Mather);
+        }
+
+        /// <summary>
+        /// Gets the Maximum Width of the Graph.
+        /// </summary>
         public int GraphWidth { get; private set; }
 
+        /// <summary>
+        /// Gets the Maximum Heigth of the Graph.
+        /// </summary>
         public int GraphHeigth { get; private set; }
 
-        public string Test
+        /// <summary>
+        /// Gets or sets an Group of <see cref="Models.SegmentModel"/>.
+        /// </summary>
+        public ObservableCollection<SegmentModel> Segments
         {
-            get => this.test;
-            set => this.SetProperty(ref this.test, value);
+            get => this.segments;
+            set => this.SetProperty(ref this.segments, value);
         }
 
-        public ObservableCollection<SegmentModel> Polo
-        {
-            get => this.polo;
-            set => this.SetProperty(ref this.polo, value);
-        }
-
+        /// <summary>
+        /// Gets the Command to update the Graph.
+        /// </summary>
         public ICommand MathCommand { get; private set; }
-
-        public ICommand MathicCommand { get; private set; }
-
-        public ICommand MathixCommand { get; private set; }
-
-        public ICommand MathoxCommand { get; private set; }
 
         private void Mather(object commandParameter)
         {
             this.UpdateGraph(10);
-        }
-
-        private void Mathic(object commandParameter)
-        {
-            this.UpdateGraph(20);
-        }
-
-        private void Mathix(object commandParameter)
-        {
-            this.UpdateGraph(-10);
-        }
-
-        private void Mathox(object commandParameter)
-        {
-            this.UpdateGraph(-20);
         }
 
         private void UpdateGraph(int yChange)
@@ -101,8 +97,8 @@ namespace SillyBattleSimulation.ViewModels
 
             if (this.updateX > maxX)
             {
-                this.Polo.Remove(this.Polo[0]);
-                foreach (var item in this.Polo)
+                this.Segments.Remove(this.Segments[0]);
+                foreach (var item in this.Segments)
                 {
                     item.From = new Point(item.From.X - 10, item.From.Y);
                     item.To = new Point(item.To.X - 10, item.To.Y);
@@ -121,9 +117,7 @@ namespace SillyBattleSimulation.ViewModels
                 this.updateY = maxY;
             }
 
-            this.Polo.Add(new SegmentModel(this.Polo[this.Polo.Count - 1].To, new Point(this.updateX, this.updateY)));
-
-            // this.Test = this.updateY.ToString();
+            this.Segments.Add(new SegmentModel(this.Segments[this.Segments.Count - 1].To, new Point(this.updateX, this.updateY)));
         }
     }
 }

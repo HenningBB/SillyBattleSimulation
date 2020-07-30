@@ -11,6 +11,9 @@ namespace SillyBattleSimulation.Models
     using System.Threading.Tasks;
     using System.Windows;
 
+    /// <summary>
+    /// Class that represents an Line on a Graph.
+    /// </summary>
     public class SegmentModel : BaseModel
     {
         private Point from;
@@ -19,18 +22,26 @@ namespace SillyBattleSimulation.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="SegmentModel"/> class.
         /// </summary>
-        public SegmentModel(Point from,Point to)
+        /// <param name="from">The starting Point.</param>
+        /// <param name="to">The end Point.</param>
+        public SegmentModel(Point from, Point to)
         {
             this.From = from;
             this.To = to;
         }
 
+        /// <summary>
+        /// Gets or sets the starting Point.
+        /// </summary>
         public Point From
         {
             get => this.from;
             set => this.SetProperty(ref this.from, value);
         }
 
+        /// <summary>
+        /// Gets or sets the end Point.
+        /// </summary>
         public Point To
         {
             get => this.to;
