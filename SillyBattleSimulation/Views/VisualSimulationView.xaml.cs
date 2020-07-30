@@ -23,7 +23,7 @@ namespace SillyBattleSimulation.Views
     /// <summary>
     /// Interaction logic for VisualSimulationView.xaml.
     /// </summary>
-    public partial class VisualSimulationView : Window
+    public partial class VisualSimulationView : UserControl
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="VisualSimulationView"/> class.

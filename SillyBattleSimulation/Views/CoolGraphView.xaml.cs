@@ -1,4 +1,4 @@
-﻿// <copyright file="MainWindowView.xaml.cs" company="PlaceholderCompany">
+﻿// <copyright file="CoolGraphView.xaml.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
@@ -15,24 +15,21 @@ namespace SillyBattleSimulation.Views
     using System.Windows.Documents;
     using System.Windows.Input;
     using System.Windows.Media;
-    using System.Windows.Media.Animation;
     using System.Windows.Media.Imaging;
     using System.Windows.Navigation;
     using System.Windows.Shapes;
-    using SillyBattleSimulation.ViewModels;
 
     /// <summary>
-    /// View for the <see cref="MainWindowViewModel"/>.
+    /// Interaction logic for CoolGraphView.xaml.
     /// </summary>
-    public partial class MainWindowView : Window
+    public partial class CoolGraphView : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MainWindowView"/> class.
+        /// Initializes a new instance of the <see cref="CoolGraphView"/> class.
         /// </summary>
-        public MainWindowView()
+        public CoolGraphView()
         {
             this.InitializeComponent();
-            this.DataContext = new MainWindowViewModel();
         }
     }
 }

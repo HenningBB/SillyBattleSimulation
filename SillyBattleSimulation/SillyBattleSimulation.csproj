@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -57,20 +58,33 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\CellModel.cs" />
+    <Compile Include="Models\PlayerModel.cs" />
+    <Compile Include="Models\SegmentModel.cs" />
     <Compile Include="Models\VisualTeamModel.cs" />
     <Compile Include="Models\VisualWarriorModel.cs" />
+    <Compile Include="Models\WorldModel.cs" />
+    <Compile Include="ViewModels\CoolGraphViewModel.cs" />
     <Compile Include="ViewModels\SimulationViewModel.cs" />
     <Compile Include="ViewModels\VisualSimulationViewModel.cs" />
+    <Compile Include="ViewModels\WorldViewModel.cs" />
+    <Compile Include="Views\CoolGraphView.xaml.cs">
+      <DependentUpon>CoolGraphView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SimulationView.xaml.cs">
       <DependentUpon>SimulationView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\StartView.xaml.cs">
-      <DependentUpon>StartView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\VisualSimulationView.xaml.cs">
       <DependentUpon>VisualSimulationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\VisualBattleModel.cs" />
+    <Compile Include="Views\WorldView.xaml.cs">
+      <DependentUpon>WorldView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\CoolGraphView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -95,11 +109,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\StartView.xaml">
+    <Page Include="Views\VisualSimulationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\VisualSimulationView.xaml">
+    <Page Include="Views\WorldView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -136,6 +150,11 @@
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Files\Team1.txt" />
+    <Resource Include="Files\Team2.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -18,5 +18,7 @@ C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\o
 C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\Views\SimulationView.g.cs
 C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\Views\SimulationView.baml
 C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\GeneratedInternalTypeHelper.g.cs
-C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\Views\StartView.g.cs
-C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\Views\StartView.baml
+C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\Views\WorldView.g.cs
+C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\Views\WorldView.baml
+C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\Views\CoolGraphView.g.cs
+C:\Users\hebull-berg\source\repos\SillyBattleSimulation2\SillyBattleSimulation\obj\Debug\Views\CoolGraphView.baml

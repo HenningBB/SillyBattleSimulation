@@ -9,6 +9,7 @@ namespace SillyBattleSimulation.ViewModels
     using System.Windows;
     using System.Windows.Input;
     using System.Windows.Threading;
+    using Microsoft.VisualBasic.FileIO;
     using SillyBattleSimulation.Commands;
     using SillyBattleSimulation.Models;
     using SillyBattleSimulation.Views;
@@ -18,9 +19,9 @@ namespace SillyBattleSimulation.ViewModels
     /// </summary>
     public class MainWindowViewModel : BaseViewModel
     {
-        private string succes;
-        private BaseViewModel currentView;
-        private bool switchero;
+        private BaseViewModel currentViewModel;
+        private bool change;
+        private bool world;
         private TeamModel team1;
         private TeamModel team2;
 
@@ -29,111 +30,166 @@ namespace SillyBattleSimulation.ViewModels
         /// </summary>
         public MainWindowViewModel()
         {
-            // TODO: Load Teams from File
-            this.CurrentView = new SimulationViewModel(this.team1, this.team2);
-            this.switchero = false;
-            this.ChangeViewCommand = new Command(this.ChangeView);
-
-            this.Succes = "HI";
             this.team1 = new TeamModel();
             this.team2 = new TeamModel();
-            this.LoadTeam(this.team1);
-            this.LoadTeam(this.team2);
+            this.LoadTeam(this.team1, this.team2);
+            this.CurrentViewModel = new SimulationViewModel(this.team1, this.team2);
+
+            this.ChangeViewmodelCommand = new Command(this.ChangeViewModel);
+            this.DeployWorldCommand = new Command(this.DeployWorld);
+            this.GraphCommand = new Command(this.Graph);
+
+            this.change = false;
+            this.world = false;
         }
 
         /// <summary>
-        /// Gets or sets a string to show Succes.
+        /// Gets the Command to change the current Viewmodel.
         /// </summary>
-        public string Succes
-        {
-            get => this.succes;
-            set => this.SetProperty(ref this.succes, value);
-        }
+        public ICommand ChangeViewmodelCommand { get; private set; }
 
         /// <summary>
-        /// Gets the Command to change the View.
+        /// Gets the Command to show/unshow the World Viewmodel.
         /// </summary>
-        public ICommand ChangeViewCommand { get; private set; }
+        public ICommand DeployWorldCommand { get; private set; }
+
+        /// <summary>
+        /// Gets the Command to show/unshow the Graph ViewModel.
+        /// </summary>
+        public ICommand GraphCommand { get; private set; }
 
         /// <summary>
         /// Gets or sets the currently selected Viewmodel.
         /// </summary>
-        public BaseViewModel CurrentView
+        public BaseViewModel CurrentViewModel
         {
-            get => this.currentView;
-            set => this.SetProperty(ref this.currentView, value);
+            get => this.currentViewModel;
+            set => this.SetProperty(ref this.currentViewModel, value);
         }
 
-        private void ChangeView(object commandParameter)
+        private void ChangeViewModel(object commandParameter)
         {
-            if (this.switchero)
+            if (!this.change)
             {
-                this.team1 = this.CurrentView.Unload(1);
-                this.team2 = this.CurrentView.Unload(2);
-                this.SaveTeam(this.team1);
-                this.SaveTeam(this.team2);
-
-                // TODO: Get current Teams and save them to file
-                this.CurrentView = new SimulationViewModel(this.team1, this.team2);
-                this.switchero = false;
+                this.SaveTeams(this.team1, this.team2);
+                this.CurrentViewModel = new VisualSimulationViewModel(this.team1, this.team2);
             }
             else
             {
-                this.team1 = this.CurrentView.Unload(1);
-                this.team2 = this.CurrentView.Unload(2);
-                this.SaveTeam(this.team1);
-                this.SaveTeam(this.team2);
-
-                // TODO: Get current Teams and save them to file
-                this.CurrentView = new VisualSimulationViewModel(this.team1, this.team2);
-                this.switchero = true;
+                this.SaveTeams(this.team1, this.team2);
+                this.team1.TeamSize = this.team1.TeamMembers.Count;
+                this.team2.TeamSize = this.team2.TeamMembers.Count;
+                this.CurrentViewModel = new SimulationViewModel(this.team1, this.team2);
             }
+
+            this.world = false;
+            this.change = !this.change;
         }
 
-        private void LoadTeam(TeamModel team)
+        private void DeployWorld(object commandParameter)
         {
-            string file;
-            if (team == this.team1)
+            if (!this.world)
             {
-                file = "../../Files/Team1.txt";
+                this.SaveTeams(this.team1, this.team2);
+                this.CurrentViewModel = new WorldViewModel();
             }
             else
             {
-                file = "../../Files/Team2.txt";
+                if (this.change)
+                {
+                    this.CurrentViewModel = new VisualSimulationViewModel(this.team1, this.team2);
+                }
+                else
+                {
+                    this.CurrentViewModel = new SimulationViewModel(this.team1, this.team2);
+                }
             }
 
+            this.world = !this.world;
+        }
+
+        private void Graph(object commandParameter)
+        {
+            this.CurrentViewModel = new CoolGraphViewModel();
+        }
+
+        private void SaveTeams(TeamModel team1, TeamModel team2)
+        {
             try
             {
-                var fs = File.Open(file, FileMode.Open, FileAccess.Read);
-                StreamReader sr = new StreamReader(fs);
+                var fs1 = File.Open("../../Files/Team1.txt", FileMode.Create, FileAccess.Write);
+                var fs2 = File.Open("../../Files/Team2.txt", FileMode.Create, FileAccess.Write);
+
+                StreamWriter sw = new StreamWriter(fs1);
+                foreach (var item in team1.TeamMembers)
+                {
+                    sw.WriteLine(item.MaxHealth + " " + item.CurrentHealth + " " + item.Strength + " " + item.Defence + " " + item.Awarenes);
+                }
+
+                sw.Close();
+
+                sw = new StreamWriter(fs2);
+                foreach (var item in team2.TeamMembers)
+                {
+                    sw.WriteLine(item.MaxHealth + " " + item.CurrentHealth + " " + item.Strength + " " + item.Defence + " " + item.Awarenes);
+                }
+
+                sw.Close();
             }
             catch
             {
-                this.Succes = team.ToString();
             }
         }
 
-        private void SaveTeam(TeamModel team)
+        private void LoadTeam(TeamModel team1, TeamModel team2)
         {
-            string file;
-            if (team == this.team1)
+            var fs1 = File.Open("../../Files/Team1.txt", FileMode.Open, FileAccess.Read);
+            var fs2 = File.Open("../../Files/Team2.txt", FileMode.Open, FileAccess.Read);
+            try
             {
-                file = "../../Files/Team1.txt";
+                var textFieldParser = new TextFieldParser(fs1)
+                { Delimiters = new string[] { " " } };
+
+                while (!textFieldParser.EndOfData)
+                {
+                    var entry = textFieldParser.ReadFields();
+                    WarriorModel warrior = new WarriorModel();
+                    warrior.MaxHealth = Convert.ToInt16(entry[0]);
+                    warrior.CurrentHealth = Convert.ToInt16(entry[1]);
+                    warrior.Strength = Convert.ToInt16(entry[2]);
+                    warrior.Defence = Convert.ToInt16(entry[3]);
+                    warrior.Awarenes = Convert.ToInt16(entry[4]);
+                    team1.AddWarrior(warrior);
+                }
+
+                textFieldParser.Close();
             }
-            else
+            catch (Exception ex)
             {
-                file = "../../Files/Team2.txt";
+                MessageBox.Show(ex.Message);
             }
 
             try
             {
-                StreamWriter sw = new StreamWriter(file);
-                sw.WriteLine(file);
-                sw.Close();
+                var textFieldParser = new TextFieldParser(fs2)
+                { Delimiters = new string[] { " " } };
+
+                while (!textFieldParser.EndOfData)
+                {
+                    var entry = textFieldParser.ReadFields();
+                    WarriorModel warrior = new WarriorModel();
+                    warrior.MaxHealth = Convert.ToInt16(entry[0]);
+                    warrior.CurrentHealth = Convert.ToInt16(entry[1]);
+                    warrior.Strength = Convert.ToInt16(entry[2]);
+                    warrior.Defence = Convert.ToInt16(entry[3]);
+                    warrior.Awarenes = Convert.ToInt16(entry[4]);
+                    team2.AddWarrior(warrior);
+                }
+
+                textFieldParser.Close();
             }
-            finally
+            catch
             {
-                this.Succes = "hallo";
             }
         }
     }

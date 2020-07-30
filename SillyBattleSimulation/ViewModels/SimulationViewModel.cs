@@ -59,8 +59,8 @@ namespace SillyBattleSimulation.ViewModels
             this.timer.Tick += this.Timer_Tick;
             this.clock = new ClockModel();
             this.clock.Angle = 0.0;
-            this.teamA = team1;
-            this.teamB = team2;
+            this.TeamA = team1;
+            this.TeamB = team2;
             this.battleModel = new BattleModel();
             this.AddWarriorACommand = new Command(this.AddWarriorA);
             this.AddWarriorBCommand = new Command(this.AddWarriorB);
@@ -81,6 +81,11 @@ namespace SillyBattleSimulation.ViewModels
         /// Gets the Command to do Battle.
         /// </summary>
         public ICommand BattleCommand { get; private set; }
+
+        /// <summary>
+        /// Gets the Command to do open a new Window to show visual Battle.
+        /// </summary>
+        public ICommand VisualBattleWindowCommand { get; private set; }
 
         /// <summary>
         /// Gets or sets the Clock.
@@ -125,23 +130,6 @@ namespace SillyBattleSimulation.ViewModels
         {
             get => this.teamB;
             set => this.SetProperty(ref this.teamB, value);
-        }
-
-        /// <summary>
-        /// Method to call on Unloading to receive the Teams.
-        /// </summary>
-        /// <param name="team">Which Team to receive.</param>
-        /// <returns>The returned Team.</returns>
-        public TeamModel Unload(int team)
-        {
-            if (team == 1)
-            {
-                return this.TeamA;
-            }
-            else
-            {
-                return this.TeamB;
-            }
         }
 
         private void AddWarriorA(object commandParameter)
@@ -207,7 +195,7 @@ namespace SillyBattleSimulation.ViewModels
                         this.TeamA.RemoveWarrior(this.TeamA.TeamMembers[0]);
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
                 }
 
@@ -233,7 +221,7 @@ namespace SillyBattleSimulation.ViewModels
                         this.TeamB.RemoveWarrior(this.TeamB.TeamMembers[0]);
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
                 }
             }

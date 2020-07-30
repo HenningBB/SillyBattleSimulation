@@ -10,8 +10,8 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="1.5*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
@@ -38,7 +38,11 @@
                 <!--<Label Content="Awarenes:"/>
                             <Label Content="{Binding KingB.Awarenes}"/>-->
             </WrapPanel>
-            <ListView ItemsSource="{Binding TeamA.TeamMembers}">
+            <ListView ItemsSource="{Binding TeamA.TeamMembers}" 
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      AutomationProperties.IsOffscreenBehavior="Offscreen" 
+                      MaxHeight="250">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <WrapPanel>
@@ -67,7 +71,11 @@
                 <!--<Label Content="Awarenes:"/>
                             <Label Content="{Binding KingB.Awarenes}"/>-->
             </WrapPanel>
-            <ListView ItemsSource="{Binding TeamB.TeamMembers}">
+            <ListView ItemsSource="{Binding TeamB.TeamMembers}" 
+                      ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                      AutomationProperties.IsOffscreenBehavior="Offscreen"
+                      MaxHeight="250">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <WrapPanel>

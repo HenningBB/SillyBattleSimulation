@@ -12,6 +12,7 @@ namespace SillyBattleSimulation.ViewModels
     using System.Runtime.CompilerServices;
     using System.Text;
     using System.Threading.Tasks;
+    using SillyBattleSimulation.Models;
 
     /// <summary>
     /// Base class from which all ViewModel should be derived.

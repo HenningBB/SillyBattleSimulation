@@ -1,11 +1,18 @@
-﻿<Window x:Class="SillyBattleSimulation.Views.VisualSimulationView"
+﻿<UserControl x:Class="SillyBattleSimulation.Views.VisualSimulationView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SillyBattleSimulation.Views"
+        xmlns:Views="clr-namespace:SillyBattleSimulation.Views"
+        xmlns:ViewModels="clr-namespace:SillyBattleSimulation.ViewModels"
         mc:Ignorable="d"
-        Title="VisualSimulationView" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Height="450" Width="800">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type ViewModels:CoolGraphViewModel}">
+            <Views:CoolGraphView />
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -13,7 +20,8 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
-            <ListView ItemsSource="{Binding Team1.VisualTeamMembers}">
+            <ContentControl Content="{Binding TeamAGraph}"/>
+            <ListView ItemsSource="{Binding TeamA.VisualTeamMembers}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <WrapPanel>
@@ -30,7 +38,10 @@
                 </ListView.ItemTemplate>
             </ListView>
         </StackPanel>
-        <ItemsControl ItemsSource="{Binding Team1.VisualTeamMembers}" Height="300" Grid.Column="1" VerticalAlignment="Top">
+        <ItemsControl ItemsSource="{Binding TeamA.VisualTeamMembers}"
+                      Height="300"
+                      Grid.Column="1"
+                      VerticalAlignment="Top">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Canvas IsItemsHost="True"/>
@@ -55,7 +66,10 @@
                     </Style>                    
                 </ItemsControl.ItemContainerStyle>
             </ItemsControl>
-        <ItemsControl ItemsSource="{Binding Team2.VisualTeamMembers}" Height="300" Grid.Column="1" VerticalAlignment="Top">
+        <ItemsControl ItemsSource="{Binding TeamB.VisualTeamMembers}" 
+                      Height="300"
+                      Grid.Column="1" 
+                      VerticalAlignment="Top">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
                 <Canvas IsItemsHost="True"/>
@@ -80,9 +94,13 @@
             </Style>
         </ItemsControl.ItemContainerStyle>
         </ItemsControl>
-        <Button Content="~Battle~" Command="{Binding Path=BattleCommand}" Grid.Column="1" VerticalAlignment="Bottom"/>
+        <Button Content="~Battle~"
+                Command="{Binding Path=BattleCommand}" 
+                Grid.Column="1" 
+                VerticalAlignment="Bottom"/>
         <StackPanel Grid.Column="2">
-            <ListView ItemsSource="{Binding Team2.VisualTeamMembers}">
+            <ContentControl Content="{Binding TeamBGraph}"/>
+            <ListView ItemsSource="{Binding TeamB.VisualTeamMembers}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <WrapPanel>
@@ -100,4 +118,4 @@
             </ListView>
         </StackPanel>
     </Grid>
-</Window>
+</UserControl>

@@ -29,6 +29,7 @@ namespace SillyBattleSimulation.Models
         {
             this.visualTeamMembers = new ObservableCollection<VisualWarriorModel>();
             this.TeamSize = model.TeamSize;
+            this.TeamMembers = model.TeamMembers;
 
             this.AddVisualWarrior(model.TeamMembers[0]);
             this.VisualTeamMembers[0].Colour = brush;
@@ -39,7 +40,7 @@ namespace SillyBattleSimulation.Models
                 this.VisualTeamMembers[i].Colour = brush;
             }
 
-            this.PLaceWarriors();
+            this.PlaceWarriors();
         }
 
         /// <summary>
@@ -93,6 +94,20 @@ namespace SillyBattleSimulation.Models
         /// <param name="warrior">The VisualWarrior to remove.</param>
         public void RemoveVisualWarrior(VisualWarriorModel warrior)
         {
+            TeamModel delete = new TeamModel();
+            foreach (var item in this.TeamMembers)
+            {
+                if (warrior.MaxHealth == item.MaxHealth && warrior.Strength == item.Strength && warrior.Defence == item.Defence && warrior.Awarenes == item.Awarenes)
+                {
+                    delete.AddWarrior(item);
+                }
+            }
+
+            foreach (var item in delete.TeamMembers)
+            {
+                this.TeamMembers.Remove(item);
+            }
+
             this.VisualTeamMembers.Remove(warrior);
             this.TeamSize = this.VisualTeamMembers.Count;
         }
@@ -158,12 +173,19 @@ namespace SillyBattleSimulation.Models
         /// <summary>
         /// Places the Warriors in a Line.
         /// </summary>
-        public void PLaceWarriors()
+        public void PlaceWarriors()
         {
-            this.VisualTeamMembers[0].PositionY = 5;
+            this.VisualTeamMembers[0].PositionY = 250;
             for (int i = 1; i < this.TeamSize; i++)
             {
-                this.VisualTeamMembers[i].PositionY = (short)(this.VisualTeamMembers[i - 1].PositionY + 10);
+                if (i % 2 == 0)
+                {
+                    this.VisualTeamMembers[i].PositionY = (short)(this.VisualTeamMembers[i - 1].PositionY + (i * 10));
+                }
+                else
+                {
+                    this.VisualTeamMembers[i].PositionY = (short)(this.VisualTeamMembers[i - 1].PositionY - (i * 10));
+                }
             }
         }
     }
