@@ -52,13 +52,20 @@ namespace SillyBattleSimulation.Models
         /// </summary>
         /// <param name="visualTeam1">First <see cref="VisualWarriorModel"/>.</param>
         /// <param name="visualTeam2">Second <see cref="VisualWarriorModel"/>.</param>
-        public void Battle(VisualTeamModel visualTeam1, VisualTeamModel visualTeam2)
+        public void TeamBattle(VisualTeamModel visualTeam1, VisualTeamModel visualTeam2)
         {
-            if (visualTeam1.TeamSize == visualTeam2.TeamSize)
+            if (visualTeam1.VisualTeamMembers.Count <= visualTeam2.VisualTeamMembers.Count)
             {
                 foreach (var item in visualTeam1.VisualTeamMembers)
                 {
                     this.Battle(item, visualTeam2.VisualTeamMembers.SingleOrDefault(x => x.PositionY == item.PositionY));
+                }
+            }
+            else if (visualTeam1.VisualTeamMembers.Count > visualTeam2.VisualTeamMembers.Count)
+            {
+                foreach (var item in visualTeam2.VisualTeamMembers)
+                {
+                    this.Battle(item, visualTeam1.VisualTeamMembers.SingleOrDefault(x => x.PositionY == item.PositionY));
                 }
             }
         }

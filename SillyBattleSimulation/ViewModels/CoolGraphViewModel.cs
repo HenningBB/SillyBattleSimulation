@@ -80,6 +80,42 @@ namespace SillyBattleSimulation.ViewModels
         /// </summary>
         public ICommand MathCommand { get; private set; }
 
+        public void UpdatetGraph(int yChange)
+        {
+            yChange *= 10;
+            int step = 10;
+            int maxX = this.GraphWidth;
+            int minY = 0;
+            int maxY = this.GraphHeigth;
+
+            this.updateX += step;
+            this.updateY = this.GraphHeigth - yChange;
+
+            if (this.updateX > maxX)
+            {
+                this.Segments.Remove(this.Segments[0]);
+                foreach (var item in this.Segments)
+                {
+                    item.From = new Point(item.From.X - step, item.From.Y);
+                    item.To = new Point(item.To.X - step, item.To.Y);
+                }
+
+                this.updateX = maxX;
+            }
+
+            if (this.updateY < minY && yChange < 0)
+            {
+                this.updateY = minY;
+            }
+
+            if (this.updateY > maxY && yChange > 0)
+            {
+                this.updateY = maxY;
+            }
+
+            this.Segments.Add(new SegmentModel(this.Segments[this.Segments.Count - 1].To, new Point(this.updateX, this.updateY)));
+        }
+
         private void Mather(object commandParameter)
         {
             this.UpdateGraph(10);

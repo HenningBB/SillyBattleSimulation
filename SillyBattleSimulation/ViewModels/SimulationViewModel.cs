@@ -175,7 +175,7 @@ namespace SillyBattleSimulation.ViewModels
             {
                 try
                 {
-                    if (this.TeamA.TeamSize > 0 && this.KingA != null)
+                    if (this.TeamA.TeamMembers.Count > 0 && this.KingA != null)
                     {
                         this.battleModel.Battle(this.TeamA.TeamMembers[0], this.KingA);
                         if (this.TeamA.TeamMembers[0].CurrentHealth <= 0)
@@ -189,7 +189,7 @@ namespace SillyBattleSimulation.ViewModels
                             this.TeamA.RemoveWarrior(this.TeamA.TeamMembers[0]);
                         }
                     }
-                    else if (this.TeamA.TeamSize > 0 && this.KingA == null)
+                    else if (this.TeamA.TeamMembers.Count > 0 && this.KingA == null)
                     {
                         this.KingA = this.TeamA.TeamMembers[0];
                         this.TeamA.RemoveWarrior(this.TeamA.TeamMembers[0]);
@@ -201,7 +201,7 @@ namespace SillyBattleSimulation.ViewModels
 
                 try
                 {
-                    if (this.TeamB.TeamSize > 0 && this.KingB != null)
+                    if (this.TeamB.TeamMembers.Count > 0 && this.KingB != null)
                     {
                         this.battleModel.Battle(this.TeamB.TeamMembers[0], this.KingB);
                         if (this.TeamB.TeamMembers[0].CurrentHealth <= 0)
@@ -215,7 +215,7 @@ namespace SillyBattleSimulation.ViewModels
                             this.TeamB.RemoveWarrior(this.TeamB.TeamMembers[0]);
                         }
                     }
-                    else if (this.TeamB.TeamSize > 0 && this.KingB == null)
+                    else if (this.TeamB.TeamMembers.Count > 0 && this.KingB == null)
                     {
                         this.KingB = this.TeamB.TeamMembers[0];
                         this.TeamB.RemoveWarrior(this.TeamB.TeamMembers[0]);

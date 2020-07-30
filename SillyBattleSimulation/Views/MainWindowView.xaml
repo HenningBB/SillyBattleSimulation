@@ -36,6 +36,7 @@
         </ToolBarTray>
         <ContentControl 
             Content="{Binding CurrentViewModel}" 
-            DockPanel.Dock="Top"/>
+            DockPanel.Dock="Top"
+            HorizontalAlignment="Stretch"/>
     </DockPanel>
 </Window>

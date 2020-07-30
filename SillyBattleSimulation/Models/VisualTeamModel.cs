@@ -28,13 +28,12 @@ namespace SillyBattleSimulation.Models
         public VisualTeamModel(TeamModel model, Brush brush)
         {
             this.visualTeamMembers = new ObservableCollection<VisualWarriorModel>();
-            this.TeamSize = model.TeamSize;
             this.TeamMembers = model.TeamMembers;
 
             this.AddVisualWarrior(model.TeamMembers[0]);
             this.VisualTeamMembers[0].Colour = brush;
 
-            for (int i = 1; i < this.TeamSize; i++)
+            for (int i = 1; i < this.TeamMembers.Count; i++)
             {
                 this.AddVisualWarrior(model.TeamMembers[i]);
                 this.VisualTeamMembers[i].Colour = brush;
@@ -94,22 +93,7 @@ namespace SillyBattleSimulation.Models
         /// <param name="warrior">The VisualWarrior to remove.</param>
         public void RemoveVisualWarrior(VisualWarriorModel warrior)
         {
-            TeamModel delete = new TeamModel();
-            foreach (var item in this.TeamMembers)
-            {
-                if (warrior.MaxHealth == item.MaxHealth && warrior.Strength == item.Strength && warrior.Defence == item.Defence && warrior.Awarenes == item.Awarenes)
-                {
-                    delete.AddWarrior(item);
-                }
-            }
-
-            foreach (var item in delete.TeamMembers)
-            {
-                this.TeamMembers.Remove(item);
-            }
-
             this.VisualTeamMembers.Remove(warrior);
-            this.TeamSize = this.VisualTeamMembers.Count;
         }
 
         /// <summary>
@@ -176,7 +160,7 @@ namespace SillyBattleSimulation.Models
         public void PlaceWarriors()
         {
             this.VisualTeamMembers[0].PositionY = 250;
-            for (int i = 1; i < this.TeamSize; i++)
+            for (int i = 1; i < this.VisualTeamMembers.Count; i++)
             {
                 if (i % 2 == 0)
                 {

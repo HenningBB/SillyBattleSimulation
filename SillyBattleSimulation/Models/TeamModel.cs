@@ -17,7 +17,6 @@ namespace SillyBattleSimulation.Models
     public class TeamModel : BaseModel
     {
         private ObservableCollection<WarriorModel> teamMembers;
-        private int teamSize;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TeamModel"/> class.
@@ -37,15 +36,6 @@ namespace SillyBattleSimulation.Models
         }
 
         /// <summary>
-        /// Gets or sets the Size of the Team.
-        /// </summary>
-        public int TeamSize
-        {
-            get => this.teamSize;
-            set => this.SetProperty(ref this.teamSize, value);
-        }
-
-        /// <summary>
         /// Generates a new Warrior for the Team.
         /// </summary>
         public void AddRandomWarrior()
@@ -53,7 +43,6 @@ namespace SillyBattleSimulation.Models
             WarriorModel warrior = new WarriorModel();
             warrior.Index = Convert.ToInt16(this.TeamMembers.Count);
             this.TeamMembers.Add(warrior);
-            this.TeamSize = this.TeamMembers.Count;
         }
 
         /// <summary>
@@ -63,7 +52,6 @@ namespace SillyBattleSimulation.Models
         public void AddWarrior(WarriorModel warrior)
         {
             this.TeamMembers.Add(warrior);
-            this.TeamSize = this.TeamMembers.Count;
         }
 
         /// <summary>
@@ -74,7 +62,6 @@ namespace SillyBattleSimulation.Models
             WarriorModel warrior = this.TeamMembers[0];
 
             this.TeamMembers.Remove(warrior);
-            this.TeamSize = this.TeamMembers.Count;
         }
 
         /// <summary>
@@ -84,7 +71,6 @@ namespace SillyBattleSimulation.Models
         public void RemoveWarrior(WarriorModel warrior)
         {
             this.TeamMembers.Remove(warrior);
-            this.TeamSize = this.TeamMembers.Count;
         }
     }
 }

@@ -20,9 +20,9 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0"
-                    VerticalAlignment="Center">
-            <ContentControl Content="{Binding TeamAGraph}"
-                            HorizontalAlignment="Left"/>
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left">
+            <ContentControl Content="{Binding TeamAGraph}"/>
             <!--<ListView ItemsSource="{Binding TeamA.VisualTeamMembers}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -101,7 +101,8 @@
                 Grid.Column="1" 
                 VerticalAlignment="Bottom"/>
         <StackPanel Grid.Column="2"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left">
             <ContentControl Content="{Binding TeamBGraph}"
                             HorizontalAlignment="Right"/>
             <!--<ListView ItemsSource="{Binding TeamB.VisualTeamMembers}">

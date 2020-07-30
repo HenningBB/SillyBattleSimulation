@@ -20,8 +20,6 @@ namespace SillyBattleSimulation.ViewModels
         private VisualTeamModel teamB;
         private CoolGraphViewModel teamAGraph;
         private CoolGraphViewModel teamBGraph;
-        private VisualWarriorModel king1;
-        private VisualWarriorModel king2;
         private VisualBattleModel visualBattle;
         private bool ticking;
         private DispatcherTimer timer = new DispatcherTimer();
@@ -38,8 +36,8 @@ namespace SillyBattleSimulation.ViewModels
             // Initialisierung
             this.TeamA = new VisualTeamModel(team1, Brushes.Red);
             this.TeamB = new VisualTeamModel(team2, Brushes.Blue);
-            this.TeamAGraph = new CoolGraphViewModel(this.TeamA.TeamSize, 100);
-            this.TeamBGraph = new CoolGraphViewModel(this.TeamB.TeamSize, 100);
+            this.TeamAGraph = new CoolGraphViewModel(this.TeamA.VisualTeamMembers.Count, 200);
+            this.TeamBGraph = new CoolGraphViewModel(this.TeamB.VisualTeamMembers.Count, 200);
             this.TeamB.MoveTeamVorward(250);
             this.TeamB.TurnTeam(true);
             this.TeamB.TurnTeam(true);
@@ -47,13 +45,6 @@ namespace SillyBattleSimulation.ViewModels
             this.BattleCommand = new Command(this.Battle);
 
             this.visualBattle = new VisualBattleModel();
-
-            // Anfangspositionen
-            // this.King1.PositionX = 5;
-            // this.King1.PositionY = 5;
-
-            // this.King2.PositionX = 55;
-            // this.King2.PositionY = 5;
 
             // Timer
             this.ticking = false;
@@ -100,24 +91,6 @@ namespace SillyBattleSimulation.ViewModels
         {
             get => this.teamB;
             set => this.SetProperty(ref this.teamB, value);
-        }
-
-        /// <summary>
-        /// Gets or sets the King of the first Team.
-        /// </summary>
-        public VisualWarriorModel King1
-        {
-            get => this.king1;
-            set => this.SetProperty(ref this.king1, value);
-        }
-
-        /// <summary>
-        /// Gets or sets the King of the second Team.
-        /// </summary>
-        public VisualWarriorModel King2
-        {
-            get => this.king2;
-            set => this.SetProperty(ref this.king2, value);
         }
 
         private void Battle(object commandParameter)
@@ -172,7 +145,7 @@ namespace SillyBattleSimulation.ViewModels
             }
             else
             {
-                this.visualBattle.Battle(this.TeamA, this.TeamB);
+                this.visualBattle.TeamBattle(this.TeamA, this.TeamB);
 
                 VisualTeamModel delete1 = new VisualTeamModel();
                 VisualTeamModel delete2 = new VisualTeamModel();
@@ -202,7 +175,7 @@ namespace SillyBattleSimulation.ViewModels
                     this.TeamB.RemoveVisualWarrior(item);
                 }
 
-                if (this.TeamA.TeamSize > 0)
+                if (this.TeamA.VisualTeamMembers.Count > 0)
                 {
                     this.TeamA.PlaceWarriors();
                 }
@@ -211,7 +184,7 @@ namespace SillyBattleSimulation.ViewModels
                     this.timer.Stop();
                 }
 
-                if (this.TeamB.TeamSize > 0)
+                if (this.TeamB.VisualTeamMembers.Count > 0)
                 {
                     this.TeamB.PlaceWarriors();
                 }
@@ -223,6 +196,9 @@ namespace SillyBattleSimulation.ViewModels
                 steps = 6;
                 this.TeamA.MoveTeamVorward(steps);
                 this.TeamB.MoveTeamVorward(steps);
+
+                this.TeamAGraph.UpdatetGraph(this.TeamA.VisualTeamMembers.Count);
+                this.TeamBGraph.UpdatetGraph(this.TeamB.VisualTeamMembers.Count);
             }
 
             this.ticker++;

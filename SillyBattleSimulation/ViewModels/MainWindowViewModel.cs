@@ -77,8 +77,6 @@ namespace SillyBattleSimulation.ViewModels
             else
             {
                 this.SaveTeams(this.team1, this.team2);
-                this.team1.TeamSize = this.team1.TeamMembers.Count;
-                this.team2.TeamSize = this.team2.TeamMembers.Count;
                 this.CurrentViewModel = new SimulationViewModel(this.team1, this.team2);
             }
 

@@ -7,8 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="{Binding Polo}" d:DesignWidth="{Binding GraphWidth}">
     <Grid>
-        <Canvas HorizontalAlignment="Center"
-                VerticalAlignment="Center"
+        <Canvas HorizontalAlignment="Left"
+                VerticalAlignment="Top"
                 Width="{Binding GraphWidth}"
                 Height="{Binding GraphHeigth}"
                 Background="AntiqueWhite">
