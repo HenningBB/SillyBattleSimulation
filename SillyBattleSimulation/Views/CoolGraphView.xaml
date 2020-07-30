@@ -11,11 +11,40 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
-        <Label Content="{Binding Test}" 
-               Grid.Column="0"/>
-        <Canvas Grid.Column="1">
-            <Polyline Points="{Binding Polo}"
-                      Stroke="Red"/>
+        <StackPanel Grid.Column="0" 
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <Label Content="{Binding Test}" />
+            <Button Content="Math Stuff"
+                Command="{Binding MathCommand}"/>
+            <Button Content="Mathic Stuff"
+                Command="{Binding MathicCommand}"/>
+            <Button Content="Mathix Stuff"
+                Command="{Binding MathixCommand}"/>
+            <Button Content="Mathox Stuff"
+                Command="{Binding MathoxCommand}"/>
+        </StackPanel>
+        
+        <Canvas Grid.Column="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Width="{Binding GraphWidth}"
+                Height="{Binding GraphHeigth}"
+                Background="AntiqueWhite">
+            <ItemsControl ItemsSource="{Binding Polo}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Line X1="{Binding From.X}" Y1="{Binding From.Y}"
+                              X2="{Binding To.X}" Y2="{Binding To.Y}"
+                                  Stroke="Red"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </Canvas>
     </Grid>
 </UserControl>

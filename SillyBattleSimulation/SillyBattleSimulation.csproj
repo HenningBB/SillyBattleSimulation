@@ -60,6 +60,7 @@
     </ApplicationDefinition>
     <Compile Include="Models\CellModel.cs" />
     <Compile Include="Models\PlayerModel.cs" />
+    <Compile Include="Models\SegmentModel.cs" />
     <Compile Include="Models\VisualTeamModel.cs" />
     <Compile Include="Models\VisualWarriorModel.cs" />
     <Compile Include="Models\WorldModel.cs" />
