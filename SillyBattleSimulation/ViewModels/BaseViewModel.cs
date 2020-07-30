@@ -4,7 +4,6 @@
 
 namespace SillyBattleSimulation.ViewModels
 {
-    using SillyBattleSimulation.Models;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -40,12 +39,6 @@ namespace SillyBattleSimulation.ViewModels
             }
 
             return false;
-        }
-
-        public TeamModel Unload(int team)
-        {
-            TeamModel team = new TeamModel();
-            return team;
         }
     }
 }

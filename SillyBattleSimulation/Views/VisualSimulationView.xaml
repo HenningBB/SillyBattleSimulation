@@ -19,9 +19,11 @@
             <ColumnDefinition Width="2*" />
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0">
-            <ContentControl Content="{Binding TeamAGraph}"/>
-            <ListView ItemsSource="{Binding TeamA.VisualTeamMembers}">
+        <StackPanel Grid.Column="0"
+                    VerticalAlignment="Center">
+            <ContentControl Content="{Binding TeamAGraph}"
+                            HorizontalAlignment="Left"/>
+            <!--<ListView ItemsSource="{Binding TeamA.VisualTeamMembers}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <WrapPanel>
@@ -31,12 +33,12 @@
                             <Label Content="{Binding Strength}"/>
                             <Label Content="Defence:"/>
                             <Label Content="{Binding Defence}"/>
-                            <!--<Label Content="Awarenes:"/>
-                            <Label Content="{Binding Awarenes}"/>-->
+                            --><!--<Label Content="Awarenes:"/>
+                            <Label Content="{Binding Awarenes}"/>--><!--
                         </WrapPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+            </ListView>-->
         </StackPanel>
         <ItemsControl ItemsSource="{Binding TeamA.VisualTeamMembers}"
                       Height="300"
@@ -98,9 +100,11 @@
                 Command="{Binding Path=BattleCommand}" 
                 Grid.Column="1" 
                 VerticalAlignment="Bottom"/>
-        <StackPanel Grid.Column="2">
-            <ContentControl Content="{Binding TeamBGraph}"/>
-            <ListView ItemsSource="{Binding TeamB.VisualTeamMembers}">
+        <StackPanel Grid.Column="2"
+                    VerticalAlignment="Center">
+            <ContentControl Content="{Binding TeamBGraph}"
+                            HorizontalAlignment="Right"/>
+            <!--<ListView ItemsSource="{Binding TeamB.VisualTeamMembers}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <WrapPanel>
@@ -110,12 +114,12 @@
                             <Label Content="{Binding Strength}"/>
                             <Label Content="Defence:"/>
                             <Label Content="{Binding Defence}"/>
-                            <!--<Label Content="Awarenes:"/>
-                            <Label Content="{Binding Awarenes}"/>-->
+                            --><!--<Label Content="Awarenes:"/>
+                            <Label Content="{Binding Awarenes}"/>--><!--
                         </WrapPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+            </ListView>-->
         </StackPanel>
     </Grid>
 </UserControl>
