@@ -38,6 +38,9 @@ namespace SillyBattleSimulation.Models
             set => this.SetProperty(ref this.locationY, value);
         }
 
+        /// <summary>
+        /// Moves the Model up.
+        /// </summary>
         public void Up()
         {
             if (this.LocationX != 0)
@@ -46,6 +49,10 @@ namespace SillyBattleSimulation.Models
             }
         }
 
+        /// <summary>
+        /// Moves the Model down.
+        /// </summary>
+        /// <param name="maxSize">Indicates the Value that cant be stepped over.</param>
         public void Down(int maxSize)
         {
             if (this.LocationX != maxSize - 1)
@@ -54,6 +61,9 @@ namespace SillyBattleSimulation.Models
             }
         }
 
+        /// <summary>
+        /// Moves the Model left.
+        /// </summary>
         public void Left()
         {
             if (this.LocationY != 0)
@@ -62,6 +72,10 @@ namespace SillyBattleSimulation.Models
             }
         }
 
+        /// <summary>
+        /// Moves the Model right.
+        /// </summary>
+        /// <param name="maxSize">Indicates the Value that cant be stepped over.</param>
         public void Right(int maxSize)
         {
             if (this.LocationY != maxSize - 1)
