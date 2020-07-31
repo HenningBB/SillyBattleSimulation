@@ -17,6 +17,7 @@ namespace SillyBattleSimulation.ViewModels
     /// </summary>
     public class WorldViewModel : BaseViewModel
     {
+        private char worldScene;
         private int size = 15;
         private ObservableCollection<WorldModel> lines;
         private PlayerModel player;
@@ -31,21 +32,23 @@ namespace SillyBattleSimulation.ViewModels
             this.Player = new PlayerModel();
             this.Mob = new PlayerModel();
 
-            this.Mob.Letter = 'd';
+            this.Mob.Letter = 'S';
             this.Mob.LocationX = 2;
             this.Mob.LocationY = 2;
 
             this.Lines = new ObservableCollection<WorldModel>();
 
-            this.UpCommand = new Command(this.Up);
-            this.DownCommand = new Command(this.Down);
-            this.LeftCommand = new Command(this.Left);
-            this.RightCommand = new Command(this.Right);
-
             for (int i = 0; i < this.size; i++)
             {
                 this.Lines.Add(new WorldModel(this.size));
             }
+
+            this.worldScene = this.Lines[0].World[0].Letter;
+
+            this.UpCommand = new Command(this.Up);
+            this.DownCommand = new Command(this.Down);
+            this.LeftCommand = new Command(this.Left);
+            this.RightCommand = new Command(this.Right);
 
             this.Lines[this.Mob.LocationX].World[this.Mob.LocationY].Letter = this.Mob.Letter;
         }
@@ -136,7 +139,7 @@ namespace SillyBattleSimulation.ViewModels
             {
                 for (int j = 0; j < this.size; j++)
                 {
-                    this.Lines[i].World[j].Letter = 'a';
+                    this.Lines[i].World[j].Letter = this.worldScene;
                 }
             }
 

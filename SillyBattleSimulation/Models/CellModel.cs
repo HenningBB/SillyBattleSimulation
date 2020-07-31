@@ -23,7 +23,7 @@ namespace SillyBattleSimulation.Models
         /// </summary>
         public CellModel()
         {
-            this.Letter = 'a';
+            this.Letter = '_';
         }
 
         /// <summary>

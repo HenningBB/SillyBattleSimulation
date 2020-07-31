@@ -17,7 +17,7 @@ namespace SillyBattleSimulation.Models
         /// </summary>
         public PlayerModel()
         {
-            this.Letter = 'o';
+            this.Letter = 'P';
         }
 
         /// <summary>
