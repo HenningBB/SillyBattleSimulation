@@ -64,10 +64,14 @@
     <Compile Include="Models\VisualTeamModel.cs" />
     <Compile Include="Models\VisualWarriorModel.cs" />
     <Compile Include="Models\WorldModel.cs" />
+    <Compile Include="ViewModels\CityViewModel.cs" />
     <Compile Include="ViewModels\CoolGraphViewModel.cs" />
     <Compile Include="ViewModels\SimulationViewModel.cs" />
     <Compile Include="ViewModels\VisualSimulationViewModel.cs" />
     <Compile Include="ViewModels\WorldViewModel.cs" />
+    <Compile Include="Views\CityView.xaml.cs">
+      <DependentUpon>CityView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CoolGraphView.xaml.cs">
       <DependentUpon>CoolGraphView.xaml</DependentUpon>
     </Compile>
@@ -81,6 +85,10 @@
     <Compile Include="Views\WorldView.xaml.cs">
       <DependentUpon>WorldView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\CityView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CoolGraphView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

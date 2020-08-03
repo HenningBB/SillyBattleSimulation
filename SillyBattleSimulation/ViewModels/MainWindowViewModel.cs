@@ -38,6 +38,7 @@ namespace SillyBattleSimulation.ViewModels
             this.ChangeViewmodelCommand = new Command(this.ChangeViewModel);
             this.DeployWorldCommand = new Command(this.DeployWorld);
             this.GraphCommand = new Command(this.Graph);
+            this.CityCommand = new Command(this.City);
 
             this.change = false;
             this.world = false;
@@ -49,14 +50,19 @@ namespace SillyBattleSimulation.ViewModels
         public ICommand ChangeViewmodelCommand { get; private set; }
 
         /// <summary>
-        /// Gets the Command to show/unshow the World Viewmodel.
+        /// Gets the Command to show/unshow the WorldViewmodel.
         /// </summary>
         public ICommand DeployWorldCommand { get; private set; }
 
         /// <summary>
-        /// Gets the Command to show/unshow the Graph ViewModel.
+        /// Gets the Command to show/unshow the GraphViewModel.
         /// </summary>
         public ICommand GraphCommand { get; private set; }
+
+        /// <summary>
+        /// Gets the Command to show/unshow the CityViewModel.
+        /// </summary>
+        public ICommand CityCommand { get; private set; }
 
         /// <summary>
         /// Gets or sets the currently selected Viewmodel.
@@ -109,6 +115,11 @@ namespace SillyBattleSimulation.ViewModels
         private void Graph(object commandParameter)
         {
             this.CurrentViewModel = new CoolGraphViewModel();
+        }
+
+        private void City(object commandParameter)
+        {
+            this.CurrentViewModel = new CityViewModel();
         }
 
         private void SaveTeams(TeamModel team1, TeamModel team2)
